@@ -1,0 +1,96 @@
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <table>
+    <tr>
+      <td colspan="3"><h2><img src="/images/login_details.png" alt="Login Details" /></h2></td>
+    </tr>
+    <tr>
+      <td><label for="user_email">Email Address</label></td>
+      <td><%= f.email_field :email, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label for="user_password">Password</label></td>
+      <td><%= f.password_field :password, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label for="user_password_confirmation">Password Again</label></td>
+      <td><%= f.password_field :password_confirmation, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td colspan="3"><h2><img src="/images/heading_payment_information.png" alt="Payment Information" /></h2></td>
+    </tr>
+    <tr>
+      <td><label>Name on Card</label></td>
+      <td><%= f.text_field :card_name, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label>Card Number</label></td>
+      <td><%= f.text_field :card_name, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label>Expiration Date</label></td>
+      <td>
+        <select>
+          <option>January</option>
+        </select>
+        <select>
+          <option>2011</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label>CVV</label></td>
+      <td><%= f.text_field :card_name, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label>Postal Code</label></td>
+      <td><%= f.text_field :card_postal_code, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td colspan="3"><h2><img src="/images/shipping_address.png" alt="Shipping Address" /></h2></td>
+    </tr>
+    <tr>
+      <td><label>Name</label></td>
+      <td><%= f.text_field :shipping_name, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label>Address</label></td>
+      <td><%= f.text_field :shipping_address, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label>City</label></td>
+      <td><%= f.text_field :shipping_city, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label>State</label></td>
+      <td>
+        <select>
+          <option>California</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label>Postal Code</label></td>
+      <td><%= f.text_field :shipping_postal_code, :size => 20 %></td>
+    </tr>
+    <tr>
+      <td><label>Country</label></td>
+      <td>
+        <select>
+          <option>United States</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit "Subscribe" %></td>
+    </tr>
+
+    <% if params[:controller] == "devise/registrations" %>
+      <tr>
+        <td></td>
+        <td><%= render :partial => "devise/shared/links" %></td>
+      </tr>
+    <% end %>
+
+  </table>
+<% end %>

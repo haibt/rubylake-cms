@@ -1,0 +1,29 @@
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+
+.main ul.listcategory{
+  
+}
+
+.article{
+     border: 1px solid #747474;
+     width:400px;height:250px;
+     float: left;
+     padding:5px;
+     margin:10px 44px 0 44px;
+  }
+.article img{
+  
+  margin: 0
+}
+.articlelienquan{
+
+}

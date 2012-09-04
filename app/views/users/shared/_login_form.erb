@@ -1,0 +1,21 @@
+<div class="content">
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <table class="narrow">
+      <tr>
+        <td><label for="user_email">Email Address</label></td>
+        <td><%= f.email_field :email, :size => 20 %></td>
+      </tr>
+      <tr>
+        <td><label for="user_password">Password</label></td>
+        <td><%= f.password_field :password, :size => 20 %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <%= f.submit "Login" %>
+          <%= link_to "Forgot Password?", "/login/forgot-password" %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+</div>

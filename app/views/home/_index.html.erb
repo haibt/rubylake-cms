@@ -1,0 +1,27 @@
+<div class="main-index clearfix">
+  <div class="mainarticle clearfix">
+    <p class = "a">
+      Featured
+    </p>
+    <% @featured_articles.each_with_index do |article, index| %>
+      <%= render :partial => "/articles/feature_short_article", :locals => {:article => article, :index => index % 4 } %>
+    <% end %>
+  </div>
+
+  <div class="mainarticle clearfix">
+    <p class="a">
+      Articles
+    </p>
+    <% @articles.each_with_index do |article, index| %>
+      <%= render :partial => "/articles/article_new", :locals => {:article => article, :index => index % 4 } %>
+    <% end %>
+  </div>
+  <div class="mainarticle clearfix">
+    <p class="a">
+      Articles Blog
+    </p>
+    <% @blog_articles.each do |article| %>
+      <%= render :partial => "/articles/blog_article", :locals => {:article => article} %>
+    <% end %>
+  </div>
+</div>

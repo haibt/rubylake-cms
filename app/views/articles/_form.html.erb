@@ -1,0 +1,56 @@
+
+<%= form_for @article, :as => :article, :url => @article.new_record? ? "/article/create" : "/article/#{@article.permalink}/edit", 
+			:method => :post, :html => { :class => "edit_article_form", :id => "edit_article_form" } do |f| %>
+  	<% if @article.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@article.errors.count, "error") %> prohibited this post from being saved:</h2>
+			<ul>
+				<% @article.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="field">
+		<%= f.label :title %>
+  		<br/>
+  		<%= f.text_field :title %>
+  	</div>
+
+	<div class="field">
+		<%= f.label :description %>
+		<br/>
+		<%= f.text_field :description %>
+	</div>
+	
+	<div class="field">
+		<%= f.label :category_id %>
+		<br />
+		<%= f.text_field :category_id %>
+	</div>
+	<div class="field">
+		<%= f.file_field :photo %>
+	</div>
+ 
+	<%= f.label :content %>
+	<br/>
+	<textarea class="ckeditor" name="content"><%= @article.content %></textarea>
+
+
+  	<br/>
+  	<%= f.submit :class => "btn btn-primary" %>
+  	<% if @article.new_record? %>
+  		<%= link_to 'Back', "/category", :class => 'btn' %>
+  	<% else %>
+  		<%= link_to 'Back', "/article/#{@article.permalink}", :class => 'btn' %>
+  	<% end %>
+
+<% end %>
+
+
+
+
+ 

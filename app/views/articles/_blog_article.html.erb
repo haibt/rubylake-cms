@@ -1,0 +1,15 @@
+<div class="blog-article">
+	<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />	
+	<% @user.each do |user| %>
+      <% if user.id == article.user_id %>
+        <p class="by">By: <%= user.email%> <span>At: <%= article.created_at%></span></p>
+      <% end %>
+    <% end %>	
+  <p class="description"><%= article.description %></p>
+    <% @blog_category.each do |category| %>
+      <% if article.category_id == category.id %>
+        <p class="category">Category: <%= category.name%>
+      <% end %>
+    <% end %> 
+	<p class="redmore"><%= link_to 'Read More', "/article/#{article.permalink}"%> &hellip;</p>
+</div>

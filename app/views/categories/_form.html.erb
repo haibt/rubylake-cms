@@ -1,0 +1,24 @@
+  <%= form_for @category, :as => :category, :url => @category.new_record? ? "/category/create" : "/category/#{@category.permalink}/edit",
+		:method => :post, :html => { :class => "edit_category_form", :id => "edit_category_form" } do |f| %>
+	<div class="field">
+		<%= f.label :name %>
+		<br/>
+		<%= f.text_field :name %>
+	</div>
+
+	<div class="field">
+		<%= f.label :user_id %>
+			<br/>
+		<%= f.text_field :user_id %>
+	</div>
+	
+	<div class="field">
+		<%= f.submit %>
+	</div>
+		<% if @category.new_record? %>
+		<%= link_to 'Back', "/category", :class => 'btn' %>
+		<% else %>
+		<%= link_to 'Back', "/category/#{@category.permalink}", :class => 'btn' %>
+		<% end %>
+  <% end %>
+

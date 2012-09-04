@@ -1,0 +1,15 @@
+<div class="subscribers">
+  <div class="container paper">
+
+    <h1><%= resource.shipping_name %></h1>
+    <div class="subnavigation">
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a class="active" href="#">Settings</a></li>
+        <li><a href="#">Shipping Address</a></li>
+        <li><a href="#">Payment Info</a></li>
+      </ul>
+    </div>
+    <%= render :partial => "/subscribers/shared/setting_form", :locals => {:subcriber => resource, :resource_name => resource_name} %>
+  </div>
+</div>

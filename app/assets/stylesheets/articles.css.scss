@@ -1,0 +1,41 @@
+// Place all the styles related to the articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#article_title,
+#article_description,
+#cke_content {
+  width: 100%;  
+}
+
+.ckeditor {
+  width: 100%;  
+  height: 100px;  
+}
+
+.main{
+  margin:20px 0px;
+}
+
+.content{
+  font-size:15px;
+}
+
+.title{
+  font-size:25px;
+  color:#005588;
+  font-weight:bold;
+}
+
+.time{
+  color:#02a5e2;
+}
+
+.description{
+  font-size:15px;
+  color:#333333;
+  font-weight:bold;
+}
+
+.main img{
+  margin:15px auto;
+}

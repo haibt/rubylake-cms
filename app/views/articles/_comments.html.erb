@@ -1,0 +1,64 @@
+<div class="comments">
+  <div>
+    <b> Comments</b>
+  </div>
+  <table>
+   <%if @comments%>
+      <% @comments.each do |comment| %>
+    <tr>
+      <td> <%= comment.comment %>
+          <%= link_to 'x'%> </td>
+    </tr>
+      <% end %>
+    <% end %>
+    <tr id="existed_comment_tmp", style="display: none">
+      <td class="comment"></td>
+      <td><a href="javascript:remove_order(id);" class="del_link">X</a></td>
+    </tr>
+    <%= form_for(@comment, :as => 'comment', :url => "/create", :html => {:id => "comment_form"} ) do |f| %>
+    <%= hidden_field_tag "comment[commentable_id]", @article.id %>
+    <%= hidden_field_tag "comment[commentable_type]","Article"%>
+    <tr>
+      <td><%= f.text_area  :comment, :cols =>20, :rows =>10 %></td>
+    </tr>
+    <tr>
+
+      <td><%= button_tag "Submit Comment", :type => "button", :id => "comment_button"  %></td>
+      <td></td>
+    </tr>
+  </table>
+  <% end %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#comment_button").live("click", function() {
+        $.ajax({
+          url : "/comments",
+          type : "POST",
+          data : $("#comment_form").serialize(),
+          dataType : "json",
+          success : function(response) {
+            if (response.result == 'success') {
+              var new_row = $("#existed_comment_tmp").clone();
+              new_row.insertAfter("#existed_comment_tmp");
+              new_row.attr("id", "comment_row_" + response.comment.id);
+              new_row.show();
+              new_row.find('.comment').text(response.comment.comment);
+              $('#comment').val('');
+              new_row.find('.del_link').attr("href", "javascript:remove_comment('#comment_row_" + response.comment.id + "')");
+            } else {
+              alert(response.message);
+            }
+          }
+        });
+      });
+
+    });
+    function remove_comment(id_str) {
+      //TODO: Xu ly ajax đẩy request lên server
+      alert("delete: " + id_str);
+      $(id_str).remove();
+    };
+
+  </script>
+
+</div>
