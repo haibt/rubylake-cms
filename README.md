@@ -34,7 +34,7 @@ Running Tests
 LICENSE
 ------------
 
-Copyright (c) 2010 Elliot Winkler
+Copyright (c) 2012 Scrum2B Team,
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
