@@ -64,8 +64,8 @@ Start the server:
     
     $ rails s
 
-Open a browser (like Chrome) to access the URL: 
-    S
+Open a browser (like Chrome) to access the URL:
+
     http://localhost:3000/
 
 
