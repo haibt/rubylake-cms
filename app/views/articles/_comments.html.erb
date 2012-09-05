@@ -2,31 +2,38 @@
   <div>
     <b> Comments</b>
   </div>
-  <table>
-   <%if @comments%>
+  
+    <%if @comments%>
       <% @comments.each do |comment| %>
-    <tr>
-      <td> <%= comment.comment %>
-          <%= link_to 'x'%> </td>
-    </tr>
+        <div class="div_comment clearfix">
+          <img class="img" src="../images/member_default_thumb.jpg" alt="avata"/>
+          <% @user.each do |user| %>
+            <% if comment.user_id == user.id %>
+             <p class="user"><%= user.email%></p> 
+            <% end %>
+          <% end %> 
+          <p class="comment"> <%= comment.comment %></p>
+          <a class="del_comment" href="#">X</a>
+        </div>     
       <% end %>
     <% end %>
-    <tr id="existed_comment_tmp", style="display: none">
-      <td class="comment"></td>
-      <td><a href="javascript:remove_order(id);" class="del_link">X</a></td>
-    </tr>
+   
+  <div id="existed_comment_tmp" class="div_comment clearfix" style="display: none">
+    <img class="img" src="../images/member_default_thumb.jpg" alt="avata"/>
+    <p class="user" ><%= @current_user.email %></p>
+    <p class="comment"></p>
+    <a href="javascript:remove_order(id);" class="del_comment">X</a>
+  </div>
+  
     <%= form_for(@comment, :as => 'comment', :url => "/create", :html => {:id => "comment_form"} ) do |f| %>
     <%= hidden_field_tag "comment[commentable_id]", @article.id %>
     <%= hidden_field_tag "comment[commentable_type]","Article"%>
-    <tr>
-      <td><%= f.text_area  :comment, :cols =>20, :rows =>10 %></td>
-    </tr>
-    <tr>
-
-      <td><%= button_tag "Submit Comment", :type => "button", :id => "comment_button"  %></td>
-      <td></td>
-    </tr>
-  </table>
+   
+   <div class="form_comment">
+     <img class="img" src="../images/member_default_thumb.jpg" alt="avata"/>
+     <%= f.text_area  :comment, :id => "text_comment" %>
+     <%= button_tag "Submit Comment", :type => "button", :id => "comment_button", :class =>"btn btn-primary" %>
+   </div>
   <% end %>
   <script type="text/javascript">
     $(document).ready(function() {
