@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
     @id_blog = Category.blog(:select => :id).collect(&:id)
     @comments = @article.comments
     @versions = @article.versions
-
+    @user = User.all
   end
 
   def edit

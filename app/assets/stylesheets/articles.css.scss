@@ -39,3 +39,49 @@
 .main img{
   margin:15px auto;
 }
+.div_comment{
+  padding:10px;
+  border:1px solid #e4e4e4;
+  position:relative;
+  margin:0 0 10px 0;
+}
+.del_comment{
+  position:absolute;
+  top:10px;
+  right:10px;
+}
+.img{
+ 
+  height:70px;
+  width:70px;
+  float:left;
+  border:1px solid red;
+}
+.div_comment p.user{
+   color:#02a5e2;
+}
+.div_comment p.comment{
+  margin:0 0 0 80px;
+}
+.form_comment{
+  background:#f7f7f7;
+  border:1px solid #e4e4e4;
+  position:relative;
+}
+.form_comment .img{
+  
+}
+.form_comment #comment_button{
+  position:absolute;
+  right:20px;
+  bottom:-50px;
+}
+.form_comment #text_comment{
+  height:100px;
+}
+
+
+
+
+
+
