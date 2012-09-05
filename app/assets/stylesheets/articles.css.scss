@@ -13,11 +13,13 @@
 }
 
 .main{
-  margin:20px 0px;
+  margin:20px 50px;
+  
 }
 
 .content{
   font-size:15px;
+  text-align :justify;
 }
 
 .title{
@@ -34,13 +36,14 @@
   font-size:15px;
   color:#333333;
   font-weight:bold;
+  text-align :justify;
 }
 
 .main img{
   margin:15px auto;
 }
 .div_comment{
-  padding:10px;
+  padding-left: 10px;
   border:1px solid #e4e4e4;
   position:relative;
   margin:0 0 10px 0;
@@ -51,13 +54,12 @@
   right:10px;
 }
 .img{
- 
-  height:70px;
+ height:70px;
   width:70px;
   float:left;
-  border:1px solid red;
 }
-.div_comment p.user{
+p.user{
+  margin:10px 0 0 80px;
    color:#02a5e2;
 }
 .div_comment p.comment{
@@ -67,17 +69,23 @@
   background:#f7f7f7;
   border:1px solid #e4e4e4;
   position:relative;
+  padding-left:10px;
 }
 .form_comment .img{
-  
+  margin-right:10px;
+}
+.del_comment{
+  cursor: pointer;
 }
 .form_comment #comment_button{
   position:absolute;
   right:20px;
   bottom:-50px;
 }
-.form_comment #text_comment{
-  height:100px;
+#text_comment{
+  margin-top:20px;
+  height:50px;
+  width:950px;
 }
 
 
