@@ -11,6 +11,11 @@ Installation the app
 Clone the app from GitHub: 
     
     $ git clone git@github.com:haibt/rubylake-cms.git
+    $ cd rubylake-cms
+
+Change to use "develop" branch for developers:
+
+    $ git checkout -b develop origin/develop
 
 Update your bundle
 
@@ -39,6 +44,7 @@ Update Facebook information:
     $ vi config/facebook.yml
 
 Create admin account:
+
     $ rails c
     > User.create(:email => "admin@admin.com", :password => "123456", :password_confirmation => "123456", :is_admin => true)
     > exit
