@@ -35,3 +35,11 @@ ul, li {
   width: 500px;
   height: 100px;
 }
+.version {
+  background: #eeeeee;
+  color: #000000;  
+  float: left;
+  margin: 0 0 0 0px;
+  padding: 20px; 
+  width: 400px;
+}
