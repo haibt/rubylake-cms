@@ -2,20 +2,24 @@
 SUMMARY
 -------
 
-(to be continue...)
+RubyLakeCMS is Content Management System, developed by Scrum2B team.
+We build RubyLakeCMS as a lightweght application to make it more simple to create a website (like News webpage, Blog webpage and Company webpage...)
+It is planed to includes some advance features like: SNS integration, Theme support, Plugin support as well as SEO support. 
 
 
-Installation the app
+LICENSE
+------------
+
+RubyLakeCMS is open source and released under the terms of the GNU General Public License v2 (GPL)  (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+
+
+INSTALLATION
 ------------
 
 Clone the app from GitHub: 
     
     $ git clone git@github.com:haibt/rubylake-cms.git
     $ cd rubylake-cms
-
-Change to use "develop" branch for developers:
-
-    $ git checkout -b develop origin/develop
 
 Update your bundle
 
@@ -61,8 +65,23 @@ Start the server:
     $ rails s
 
 Open a browser (like Chrome) to access the URL: 
-    
+    S
     http://localhost:3000/
+
+
+For developers
+-------------
+
+Change to use "develop" branch for developers:
+
+    $ git checkout -b develop origin/develop
+
+Commit codes
+	
+	$ git fetch --all
+	$ git merge origin/develop
+	$ git commit -m "Message Content in here"
+	$ git push -u origin develop
 
 
 Running Tests
@@ -70,27 +89,3 @@ Running Tests
 
 (to be continue...)
 
-
-LICENSE
-------------
-
-Copyright (c) 2012 Scrum2B Team,
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
