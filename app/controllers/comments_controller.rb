@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :check_commentable_object!
+  before_filter :check_commentable_object!, :except => :destroy
   COMMENTABLE_TYPES = ["article"]
 
   def create
@@ -10,6 +10,20 @@ class CommentsController < ApplicationController
       render :json => {:result => "fail", :message => (@comment ? @comment.errors.full_messages : "Error to create the comment") }
     end
     @comment = Comment.all
+  end
+
+  def destroy
+    @comment = Comment.find_by_id params[:id]
+    Rails.logger.info "Param id: #{params[:id]}"
+    if @comment 
+      if @comment.destroy
+        render :json => {:result => "true", :message => "Success to delete the message" }
+      else
+        render :json => {:result => "false", :message => "Fail to delete the message" }
+      end
+    else
+      render :json => {:result => "false", :message => "Not found object to comment" } 
+    end
   end
 
   private
@@ -23,9 +37,5 @@ class CommentsController < ApplicationController
     return true if @commentable
     render :json => {:result => "false", :message => "Not found object to comment" }
   end
-  def destroy
-  @comment = Comment.find_by params [:id]
-  @comment.destroy_comment
-  end
-
+  
 end
