@@ -6,5 +6,15 @@ class ApplicationController < ActionController::Base
   def set_main_menus
     @main_menus = Menu.main.all
   end
+  
+  protected
+
+  def ckeditor_pictures_scope(options = {})
+    ckeditor_filebrowser_scope(options)
+  end
+
+  def ckeditor_attachment_files_scope(options = {})
+    ckeditor_filebrowser_scope(options)
+  end
 
 end

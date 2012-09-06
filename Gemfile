@@ -13,6 +13,9 @@ gem 'omniauth-facebook'
 gem 'paper_trail', '~> 2'
 gem "paperclip", "~> 3.0"
 
+gem "ckeditor", "3.7.1"
+gem "carrierwave"
+gem "mini_magick"
 
 # Gems used only for assets and not required
 # in production environments by default.
