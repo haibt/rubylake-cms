@@ -52,6 +52,13 @@
   position:absolute;
   top:10px;
   right:10px;
+  cursor: pointer;
+}
+.edit_comment{
+  position:absolute;
+  top:10px;
+  right:55px;
+  cursor: pointer;
 }
 .img{
  height:70px;
@@ -62,8 +69,9 @@ p.user{
   margin:10px 0 0 80px;
    color:#02a5e2;
 }
+
 .div_comment p.comment{
-  margin:0 0 0 80px;
+  margin:10px 10px 10px 80px;
 }
 .form_comment{
   background:#f7f7f7;
@@ -74,9 +82,7 @@ p.user{
 .form_comment .img{
   margin-right:10px;
 }
-.del_comment{
-  cursor: pointer;
-}
+
 .form_comment #comment_button{
   position:absolute;
   right:20px;
@@ -87,8 +93,15 @@ p.user{
   height:50px;
   width:950px;
 }
-
-
+#rep_cmt{
+  margin-left:10px;
+  height:50px;
+  width:950px;
+}
+#submit_repcmt{
+  float:right;
+  margin:0 20px 10px 0;
+}
 
 
 

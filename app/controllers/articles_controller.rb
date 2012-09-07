@@ -1,13 +1,9 @@
 class ArticlesController < ApplicationController
 
   before_filter :current_user_could_update?, :only => [:edit, :move, :update, :delete, :create]
+
   def show
     @article = Article.find_by_permalink params[:permalink]
-    @articles = Article.live.public.order("updated_at DESC")
-    @id_blog = Category.blog(:select => :id).collect(&:id)
-    @comments = @article.comments
-    @versions = @article.versions
-    @user = User.all
   end
 
   def edit

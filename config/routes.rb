@@ -41,6 +41,7 @@ RubyLakeCms::Application.routes.draw do
 
 
   post '/comments/:id/delete' => 'comments#destroy'
+  post '/comments/:id/update'=> 'comments#update'
   resources :comments
   resources :versions
 
