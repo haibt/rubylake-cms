@@ -25,26 +25,22 @@
 
 <div class="main" style="display:block;">
 	<h3>More news...</h3>
-	<% @articles.each do |article| %>
-	  <% if @article.category_id == article.category_id && article.id != @article.id %>
-	    <ul>
-	      <li><%= link_to article.title, "/article/#{article.permalink}" %></li>
-	    </ul>
-	  <% end %>
-	<% end %>
+  <ul>
+    <% @article.related_articles.each do |article| %>
+      <li><%= link_to article.title, "/article/#{article.permalink}" %></li>
+    <% end %>
+  </ul>
 </div>
 <br/>
 <br/>
 <br/>
 
 <div class="main" style="display:block;"> 
-	<% if @id_blog.include? @article.category_id %>
-	  <% if current_user %>
-	    <%= render :partial => "comments" %>
-	  <% end %>
-	<% else %>
-	  <%= render :partial => "public_comments" %>
-	<% end %>
+  <% if @article.category && @article.category.is_blog? %>
+    <%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
+  <% else %>
+    <%= render :partial => "public_comments" %>
+  <% end %>
 </div>
 
 <div class="main" style="display:block;"> 
