@@ -44,7 +44,7 @@ RubyLakeCms::Application.routes.draw do
   post '/comments/:id/update'=> 'comments#update'
   resources :comments
   resources :versions
-
+  get '/images/' => 'images#index'
 
   resources :home
   # Sample of regular route:

@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find_by_permalink params[:permalink]
+    @images = Image.all
   end
 
   def edit

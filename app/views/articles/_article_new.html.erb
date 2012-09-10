@@ -1,5 +1,5 @@
 <div class="article-new <%= "first-child" if index && index == 0 %>">
-	<%= image_tag article.photo.url(:thumb) %>
+	<%= image_tag article.default_image.photo.url(:thumb) %>
 	<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />	
 	<% @user.each do |user| %>
     <% if user.id == article.user_id %>

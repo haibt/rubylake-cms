@@ -5,7 +5,8 @@
   <p class="description"><%= @article.description %></p>
   <br/>
   <p class="content"><%= raw @article.content %></p>
- 
+  
+    <%= image_tag @article.default_image.photo.url(:thumb) %>
   <br/>
   <% if @article.updatable_by?(current_user) %>
     <div align="right">
