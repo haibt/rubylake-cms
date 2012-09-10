@@ -1,7 +1,7 @@
 <div class="version">
   <b> Versions List </b><br/>
-  <% versions.each do |version|%>
-  <a id="update" style="cursor: pointer"> <%= version.event%></a>
+  <% @article.versions.each do |version|%>
+  <a id="event" style="cursor: pointer"> <%= version.event%></a>
   <div>
     <%= version.created_at%>
   </div>
@@ -10,12 +10,12 @@
     <button id="hidr"> Hide</button>
   </div><br/>
   <% end %>
-</div>
+
 
 <script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#update').click(function() {
+    $('#event').live("click", function(){
       $('#version').show();
     });
     $('#hidr').click(function() {
@@ -23,3 +23,4 @@
     });
   }); 
 </script>
+</div>
