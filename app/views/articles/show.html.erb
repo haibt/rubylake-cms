@@ -1,10 +1,12 @@
-<div class="main"> 
-   <p class="title"><%= @article.title %></p>
-   <p class="time"><%= @article.created_at%></p>
-   <p class="description"><%= @article.description %></p>
-   <%= image_tag @article.photo.url(:medium) %>
-   <p class="content"><%= @article.content %></p>
-  
+<div class="main" style="display:block;"> 
+  <p class="title"><%= @article.title %></p>
+  <p class="time"><%= @article.created_at%></p>
+  <br/>
+  <p class="description"><%= @article.description %></p>
+  <br/>
+  <p class="content"><%= raw @article.content %></p>
+ 
+  <br/>
   <% if @article.updatable_by?(current_user) %>
     <div align="right">
       <%= link_to 'Edit', { :action => 'edit', :permalink => @article.permalink }, :class => "btn btn-primary" %>
@@ -16,24 +18,31 @@
       <%= link_to 'Create New', {:action=>'new'}, :class => "btn btn-primary" %>
     </div>
   <% end %>
-  
-  <h3>More news... </h3>
-    <% @articles.each do |article| %>
-      <% if @article.category_id == article.category_id && article.id != @article.id %>
-        <ul>
-          <li><%= link_to article.title, "/article/#{article.permalink}" %></li>
-         <% end %>
-        </ul>
+</div>
+<br/>
+<br/>
+<br/>
+
+<div class="main" style="display:block;">
+	<h3>More news...</h3>
+  <ul>
+    <% @article.related_articles.each do |article| %>
+      <li><%= link_to article.title, "/article/#{article.permalink}" %></li>
     <% end %>
-    <% if @id_blog.include? @article.category_id%>
-    <%if current_user%>
-      <%= render :partial => "comments" %>
-      <%end%>
-     <% else %>
-      <%= render :partial => "public_comments" %>
-    <% end %>
+  </ul>
+</div>
+<br/>
+<br/>
+<br/>
+
+<div class="main" style="display:block;"> 
+  <% if @article.category && @article.category.is_blog? %>
+    <%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
+  <% else %>
+    <%= render :partial => "public_comments" %>
+  <% end %>
 </div>
 
+<div class="main" style="display:block;"> 
   <%= render :partial => "version_history", :locals => { :articles => @articles } %>
-  
 </div>

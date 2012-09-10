@@ -1,7 +1,7 @@
 <div class="version">
   <b> Versions List </b><br/>
-  <% @versions.each do |version|%>
-  <a id="update" href="#"> <%= version.event%></a>
+  <% versions.each do |version|%>
+  <a id="update" style="cursor: pointer"> <%= version.event%></a>
   <div>
     <%= version.created_at%>
   </div>

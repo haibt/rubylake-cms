@@ -29,6 +29,11 @@ class Article < ActiveRecord::Base
     return true if check_user.admin? || check_user == self.author
     return category && category.updatable_by?(check_user)
   end
+  
+  def related_articles
+    return [] unless self.category_id
+    return Article.live.public.where(:category_id => self.category_id).order("updated_at DESC").limit(10)
+  end
 
 end
 

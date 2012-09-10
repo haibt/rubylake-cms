@@ -8,7 +8,7 @@ It is planed to includes some advance features like: SNS integration, Theme supp
 
 
 LICENSE
-------------
+-------
 
 RubyLakeCMS is open source and released under the terms of the GNU General Public License v2 (GPL)  (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
@@ -58,7 +58,7 @@ Create admin account:
 
 
 Running App
--------------
+-----------
 
 Start the server:
     
@@ -70,7 +70,7 @@ Open a browser (like Chrome) to access the URL:
 
 
 For developers
--------------
+--------------
 
 Change to use "develop" branch for developers:
 

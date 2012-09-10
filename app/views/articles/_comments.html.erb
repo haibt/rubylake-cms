@@ -2,41 +2,75 @@
   <div>
     <b> Comments</b>
   </div>
-  
-    <%if @comments%>
-      <% @comments.each do |comment| %>
-        <div class="div_comment clearfix">
-          <img class="img" src="../images/member_default_thumb.jpg" alt="avata"/>
-          <% @user.each do |user| %>
-            <% if comment.user_id == user.id %>
-             <p class="user"><%= user.email%></p> 
-            <% end %>
-          <% end %> 
-          <p class="comment"> <%= comment.comment %></p>
-          <a class="del_comment" href="#">X</a>
-        </div>     
-      <% end %>
-    <% end %>
-   
-  <div id="existed_comment_tmp" class="div_comment clearfix" style="display: none">
-    <img class="img" src="../images/member_default_thumb.jpg" alt="avata"/>
-    <p class="user" ><%= @current_user.email %></p>
-    <p class="comment"></p>
-    <a href="javascript:remove_order(id);" class="del_comment">X</a>
-  </div>
-  
-    <%= form_for(@comment, :as => 'comment', :url => "/create", :html => {:id => "comment_form"} ) do |f| %>
+
+  <% comments.each do |comment| %>
+    <%= render :partial => "comment_show", :locals => { :comment => comment } %>
+  <% end %>
+
+  <%= form_for(@comment, :as => 'comment', :url => "/create", :html => {:id => "comment_form"} ) do |f| %>
     <%= hidden_field_tag "comment[commentable_id]", @article.id %>
     <%= hidden_field_tag "comment[commentable_type]","Article"%>
-   
-   <div class="form_comment">
-     <img class="img" src="../images/member_default_thumb.jpg" alt="avata"/>
-     <%= f.text_area  :comment, :id => "text_comment" %>
-     <%= button_tag "Submit Comment", :type => "button", :id => "comment_button", :class =>"btn btn-primary" %>
-   </div>
+  
+    <div class="form_comment clearfix">
+      <img class="img" src="/images/member_default_thumb.jpg" alt="avata"/>
+      <%= f.text_area  :comment, :id => "text_comment" %>
+      <%= button_tag "Submit Comment", :type => "button", :id => "comment_button", :class =>"btn btn-primary" %>
+    </div>
   <% end %>
+
   <script type="text/javascript">
     $(document).ready(function() {
+      $("a.del_comment").live("click", function() {
+        var comment_id = $(this).attr("rblake:comment_id");
+        var del_url = "/comments/" + comment_id + "/delete";
+        $.ajax({
+          url : del_url,
+          type : "POST",
+          dataType : "json",
+          success : function(response) {
+            if (response.result) {
+              $(".div_comment#comment_" + comment_id).hide();
+              alert(response.message);
+            } else {
+              alert(response.message);
+            }
+          }
+        });
+
+      });
+      
+      $(".edit_comment").live("click", function() {
+        $(this).parent().find(".comment").hide();
+        $(this).parent().find(".comment_edit_form").show();
+        $(this).parent().find(".edit_comment").hide();
+        $(this).parent().find(".del_comment").hide();
+      });
+      
+      $("#cancel_repcmt").live("click", function() {
+        $(this).parent().parent().find(".comment").show();
+        $(this).parent().parent().find(".comment_edit_form").hide();
+        $(this).parent().parent().find(".edit_comment").show();
+        $(this).parent().parent().find(".del_comment").show();
+      });
+      
+      $("#submit_repcmt").live("click", function() {
+        var comment_id = $(this).parent().parent().find(".edit_comment").attr("rblake:comment_id");
+        var update_url = "/comments/" + comment_id + "/update";
+        $.ajax({
+          url : update_url,
+          type : "POST",
+          data : $("#form_edit_" + comment_id).serialize(),
+          dataType : "json",
+          success : function(response) {
+            if (response.result == 'success') {
+             $("#comment_" + comment_id).replaceWith(response.content);
+            } else {
+              alert(response.message);
+            }
+          }
+        });
+      });
+
       $("#comment_button").live("click", function() {
         $.ajax({
           url : "/comments",
@@ -45,13 +79,8 @@
           dataType : "json",
           success : function(response) {
             if (response.result == 'success') {
-              var new_row = $("#existed_comment_tmp").clone();
-              new_row.insertAfter("#existed_comment_tmp");
-              new_row.attr("id", "comment_row_" + response.comment.id);
-              new_row.show();
-              new_row.find('.comment').text(response.comment.comment);
-              $('#comment').val('');
-              new_row.find('.del_link').attr("href", "javascript:remove_comment('#comment_row_" + response.comment.id + "')");
+              $("#comment_form").before(response.content);
+              $("#text_comment").val("");
             } else {
               alert(response.message);
             }
@@ -60,12 +89,17 @@
       });
 
     });
-    function remove_comment(id_str) {
-      //TODO: Xu ly ajax đẩy request lên server
-      alert("delete: " + id_str);
-      $(id_str).remove();
-    };
 
   </script>
-
 </div>
+
+
+
+
+
+
+
+
+
+
+

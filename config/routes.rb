@@ -1,4 +1,6 @@
 RubyLakeCms::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   namespace :admin do
@@ -37,6 +39,9 @@ RubyLakeCms::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+
+  post '/comments/:id/delete' => 'comments#destroy'
+  post '/comments/:id/update'=> 'comments#update'
   resources :comments
   resources :versions
 
