@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   has_paper_trail
   belongs_to :category
   belongs_to :author, :class_name => 'User', :foreign_key => 'user_id'
+  belongs_to :user
   has_many :comments, :as => :commentable
   has_many :versions
   attr_accessible :is_public, :is_featured, :deleted_by, :title, :permalink, :description, :content, :user_id, :photo, :status, :category_id, :location, :created_at, :updated_at

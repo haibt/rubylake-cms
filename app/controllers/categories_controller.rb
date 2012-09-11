@@ -2,13 +2,12 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find_by_permalink params[:permalink]
-    @articles = Article.live.public.order("updated_at DESC")
+    @articles = @category.articles.public.live.order("updated_at DESC")
   end
 
   def index
     @categories = Category.all
     @articles = Article.live.public.order("updated_at DESC")
-
   end
 
   def new

@@ -1,6 +1,6 @@
-<div class="span3 article-new <%= "first-child" if index && index == 0 %>">
+<div class="span3 article <%= "first-child" if index && index == 0 %>">
 	<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />	
-	<p class="by">By: <%= article.user.email if article.user %></p>
-	<img src="/images/default_medium.png">
+    <p class="by">By: <%= article.user.email if article.user %></p>
+    <img src="/images/default_medium.png">
     <p class="redmore"><%= link_to 'Read More', "/article/#{article.permalink}"%> &hellip;</p>
 </div>

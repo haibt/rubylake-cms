@@ -1,12 +1,8 @@
-<div class="featured <%= "first-child" if index && index == 0 %>" >
+<div class="span6 featured <%= "first-child" if index && index == 0 %>" >
+	<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />
+	<p class="by">By: <%= article.user.email if article.user %></p>
 	<div class="only-featured">
-		<%= image_tag article.photo.url(:thumb) %>
-		<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />
-		<% @user.each do |user| %>
-		<% if user.id == article.user_id %>
-		<p class="by">By: <%= user.email%></p>
-		<% end %>
-		<% end %>
+		<img src="/images/default_medium.png">
 		<p class="description"><%= article.description %></p>
 	</div>
 	<p class="redmore"><%= link_to 'Read More', "/article/#{article.permalink}"%> &hellip;</p>
