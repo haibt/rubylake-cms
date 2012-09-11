@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906190607) do
+ActiveRecord::Schema.define(:version => 20120910043102) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -19,19 +19,14 @@ ActiveRecord::Schema.define(:version => 20120906190607) do
     t.string   "description"
     t.string   "content"
     t.integer  "user_id"
-    t.string   "status",             :limit => 8
+    t.string   "status",      :limit => 8
     t.integer  "category_id"
     t.string   "location"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.string   "img"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "deleted_by"
-    t.boolean  "is_public",                       :default => false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.boolean  "is_featured",                     :default => false
+    t.boolean  "is_public",                :default => false
+    t.boolean  "is_featured",              :default => false
   end
 
   create_table "categories", :force => true do |t|
@@ -75,6 +70,16 @@ ActiveRecord::Schema.define(:version => 20120906190607) do
     t.integer  "article_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "images", :force => true do |t|
+    t.integer  "article_id"
+    t.boolean  "is_main",            :default => false
+    t.boolean  "is_public",          :default => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "menus", :force => true do |t|
