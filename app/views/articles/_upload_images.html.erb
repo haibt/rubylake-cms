@@ -1,0 +1,26 @@
+<b>Upload image</b>
+  <%= form_for( @images, :as => 'image', :url => "/images/uploadFile", :html => {:id => "upload_form"} ) do |f| %>
+    <%= hidden_field_tag "image[article_id]", @article.id %>
+    <%= f.file_field :photo%>
+    <%= f.submit "Upload" %>
+  <%end%>
+    <% images.each do |image| %>
+    <%= link_to image_tag(image.photo.url(:thumb)), image.photo.url(:medium), rel: "prettyPhoto" %>
+  <% end %>
+
+<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script type="text/javascript" charset="utf-8">
+
+    $(document).ready(function(){
+       $("a[rel^='prettyPhoto']").prettyPhoto({
+            animationSpeed: 'normal', /* fast/slow/normal */
+            padding: 40, /* padding for each side of the picture */
+            opacity: 0.35, /* Value betwee 0 and 1 */
+            showTitle: false, /* true/false */
+            allowresize: false, /* true/false */
+            counter_separator_label: '/', /* The separator for the gallery counter 1 "of" 2 */
+            theme: 'dark_rounded' /* light_rounded / dark_rounded / light_square / dark_square */
+        });
+    });
+</script>

@@ -6,6 +6,7 @@ gem 'rails', '3.2.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3' 
+gem 'mysql2'
 gem "devise"
 gem 'fastercsv' # Only required on Ruby 1.8 and below
 gem 'rails_admin'
@@ -31,6 +32,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'prettyphoto-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

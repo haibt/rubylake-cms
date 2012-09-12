@@ -15,3 +15,5 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require ckeditor/init
+//= require jquery
+//= require prettyphoto-rails

@@ -1,31 +1,30 @@
-<div class="container" style="display:block;">
-	<p class="title">
-		<%= @article.title %>
-	</p>
-	<p class="time">
-		<%= @article.created_at%>
-	</p>
-	<br/>
-	<p class="description">
-		<%= @article.description %>
-	</p>
-	<br/>
-	<p class="content">
-		<%= raw @article.content %>
-	</p>
 
-	<br/>
-	<% if @article.updatable_by?(current_user) %>
-	<div align="right">
-		<%= link_to 'Edit', { :action => 'edit', :permalink => @article.permalink }, :class => "btn btn-primary" %>
-		<%= link_to 'Move', { :action => 'move', :permalink => @article.permalink }, :class => "btn btn-primary" %>
-		 <a class="del_article btn btn-primary" >Delete</a>
-		</div>
-	<% else %>
-	<div align="right">
-		<%= link_to 'Create New', {:action=>'new'}, :class => "btn btn-primary" %>
-	</div>
-	<% end %>
+<div class="container" style="display:block;"> 
+  <p class="title"><%= @article.title %></p>
+  <p class="time"><%= @article.created_at%></p>
+  <br/>
+  <p class="description">
+    <%= @article.description %>
+  </p>
+  <br/>
+  <p class="content">
+    <%= raw @article.content %>
+  </p>
+  <%= image_tag @article.default_image.photo.url(:thumb) %>
+  <br/>
+  <%= render :partial => "upload_images", :locals => { :images => @article.images} %>
+  
+  <% if @article.updatable_by?(current_user) %>
+  <div align="right">
+    <%= link_to 'Edit', { :action => 'edit', :permalink => @article.permalink }, :class => "btn btn-primary" %>
+    <%= link_to 'Move', { :action => 'move', :permalink => @article.permalink }, :class => "btn btn-primary" %>
+    <%= link_to 'Delete', { :action => 'delete',:permalink => @article.permalink }, :class => "btn btn-primary", :confirm => 'Are you sure?' %>
+  </div>
+  <% else %>
+  <div align="right">
+    <%= link_to 'Create New', {:action=>'new'}, :class => "btn btn-primary" %>
+  </div>
+  <% end %>
 </div>
 <br/>
 <br/>
@@ -56,7 +55,6 @@
 <div class="row-fluid" style="display:block;">
 	<%= render :partial => "version_history", :locals => { :articles => @articles } %>
 </div>
-
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
