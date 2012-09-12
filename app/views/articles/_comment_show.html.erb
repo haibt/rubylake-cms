@@ -13,9 +13,9 @@
   </form>
   
   <% if comment.deletable_by?(current_user) %>
-    <a class="del_comment" rblake:comment_id="<%= comment.id %>" >Delete</a>
+    <a class="del_comment" rblake:comment_id="<%= comment.id %>">Delete</a>
   <% end %>
   <% if comment.editable_by?(current_user) %>
-    <a class="edit_comment" rblake:comment_id="<%= comment.id %>" >Edit</a>
+    <a class="edit_comment" rblake:comment_id="<%= comment.id %>">Edit</a>
   <% end %>
 </div>

@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     Rails.logger.info "Param id: #{params[:id]}"
     if @comment 
       if @comment.destroy
-        render :json => {:result => "true", :message => "Success to delete the message" }
+       render :json => {:result => "true", :message => "Success to delete the message" }
       else
         render :json => {:result => "false", :message => "Fail to delete the message" }
       end

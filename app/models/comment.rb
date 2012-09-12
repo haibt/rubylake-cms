@@ -20,8 +20,8 @@ class Comment < ActiveRecord::Base
 
   def deletable_by? (check_user)
     return false unless check_user
-    return check_user.admin? || check_user == self.user || check_user.moderator?
-    #return category && category.updatable_by?(check_user)
+    return check_user.admin? || check_user == self.user 
+    
   end
 
   def editable_by? (check_user)

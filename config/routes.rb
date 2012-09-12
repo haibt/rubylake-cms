@@ -40,7 +40,7 @@ RubyLakeCms::Application.routes.draw do
   # first created -> highest priority.
 
 
-  post '/comments/:id/delete' => 'comments#destroy'
+  post '/comments/:id/delete'=> 'comments#destroy'
   post '/comments/:id/update'=> 'comments#update'
   resources :comments
   resources :versions

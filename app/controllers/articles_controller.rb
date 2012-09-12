@@ -12,16 +12,23 @@ class ArticlesController < ApplicationController
   def move
     if request.get?
       @categories = Category.all
+      
     elsif request.post?
       @article.update_attribute(:category_id, params[:new_category_id])
       redirect_to "/article/#{@article.permalink}"
+      flash[:notice] = "You have successfully to move the article: #{@article.title}"
     end
   end
 
   def delete
     @article.deleted_by = current_user.id
     @article.updated_at = Time.now
-    @article.save
+    if @article.save 
+    flash[:notice] = "You have successfully to delete the article: #{@article.title}"
+     elsif 
+       flash[:error] = "You have error to delete the article: #{@article.title}"
+    
+    end
     redirect_to '/category'
   end
 
@@ -30,9 +37,13 @@ class ArticlesController < ApplicationController
       if @article.update_attributes(params[:article])
         format.html { redirect_to "/article/#{@article.permalink}", notice: 'article was successfully updated.' }
         format.json { head :no_content }
+        flash[:notice] = "You have successfully to update the article: #{@article.title}"
+        
       else
         format.html { render action: "edit" }
         format.json { render json: @article.errors, status: :unprocessable_entity }
+        flash[:error] = "You have error to update the article: #{@article.title}"
+        
       end
     end
   end
@@ -60,12 +71,13 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       @article.user_id = current_user.id
       if @article.save
-
+        flash[:notice] = "You have successfully to create the article"
         format.html { redirect_to "/article/#{@article.permalink}", notice: 'Article was successfully created.' }
         format.json { render json: @article, status: :created, location: @artilce }
       else
         format.html { render action: "new" }
         format.json { render json: @article.errors, status: :unprocessable_entity }
+        flash[:error] = "You have error to create the article"
       end
     end
   end

@@ -16,5 +16,10 @@ class ApplicationController < ActionController::Base
   def ckeditor_attachment_files_scope(options = {})
     ckeditor_filebrowser_scope(options)
   end
+  
+  def flash_notices
+    flash[:notices] = [] unless flash[:notices]
+    return flash[:notices]
+  end
 
 end

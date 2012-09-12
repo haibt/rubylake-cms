@@ -13,17 +13,12 @@
 		</ul>
 		<%= link_to 'Create Category',{:action=>'new'} %>
 	</div><!------end div category---->
-	<div class="mainarticle clearfix">
-		<% @articles.each do |article| %>
-		<div class="article">
-			<%= image_tag article.photo.url(:thumb) %>
-			<%= link_to article.title, "/article/#{article.permalink}"%>
-			<br />
-			<%= article.description %>
-		</div><!------end div article- ---->
+	<div class="container row-fluid">
+		<% @articles.each_with_index do |article, index| %>
+		<%= render :partial => "/articles/article", :locals => {:article => article, :index => index % 4 } %>
 		<% end %>
-
-	<div class="articlelienquan">
+	</div>
+	<div class="container">
 		<p>Các bài viết liên quan</p>
 		<ul>
 			<% @articles.each do |article|%>
@@ -32,4 +27,3 @@
 		</ul>
 	&hellip;
 	</div><!------end div article-lienquan---->
-</div><!------end div mainarticle- ---->

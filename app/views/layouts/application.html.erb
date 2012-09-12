@@ -77,9 +77,29 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="container">
-			<%= yield %>
+			<div id="main_messages">
+				<div  id="success_message_temp" class="success-message alert-success fade in">
+				   <a class="close" data-dismiss="alert" href="#">&times;</a>
+				   <strong> </strong><br />
+		 		</div>
+		 		<div id="error_message_temp" class="error-message alert-error fade in">
+				   <a class="close" data-dismiss="alert" href="#">&times;</a>
+				   <strong></strong><br />
+		 		</div>
+		 		
+			 	<% if flash[:notice] %>
+		      		<p class="notice"><%= flash[:notice] %><span class="close">x</span></p>
+		    	<% end %>
+				<% if flash[:error] %>
+		      		<p class="error"><%= flash[:error] %><span class="close">x</span></p>
+		    	<% end %>   
+		    </div>
+
+		   <%= yield %>
+	 	
+	 	
 		</div>
 
 		<div class="footer">
@@ -92,4 +112,11 @@
     </div>
 
 	</body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("span.close").live("click", function() {
+				$(this).parent().hide();
+			});
+	});		
+</script>	
 </html>

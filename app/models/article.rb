@@ -27,7 +27,7 @@ class Article < ActiveRecord::Base
   
   def updatable_by? (check_user)
     return false unless check_user
-    return true if check_user.admin? || check_user == self.author
+    return true if check_user.admin? || check_user == self.author 
     return category && category.updatable_by?(check_user)
   end
   
