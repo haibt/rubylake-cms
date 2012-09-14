@@ -20,7 +20,6 @@ RubyLakeCms::Application.routes.draw do
     match "/login/restore-password" => "devise/passwords#create" # Add a Custom Route for Forgot password
   end
   match '/profile' => 'home#profile'
-  match '/article/vd' =>'articles#vd'
   get '/article/new' => 'articles#new'
   post '/article/create' => 'articles#create'
   get '/article/:permalink/edit' => 'articles#edit'

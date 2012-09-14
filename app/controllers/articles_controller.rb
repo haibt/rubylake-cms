@@ -8,8 +8,6 @@ class ArticlesController < ApplicationController
 
   def edit
   end
-  def vd
-  end
 
   def move
     if request.get?
