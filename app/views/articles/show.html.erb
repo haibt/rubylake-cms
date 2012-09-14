@@ -10,7 +10,7 @@
   <p class="content">
     <%= raw @article.content %>
   </p>
-  <%= image_tag @article.default_image.photo.url(:thumb) %>
+ <div id="img-df"> <%= image_tag @article.default_image.photo.url(:thumb) %></div>
   <br/>
   <%= render :partial => "upload_images", :locals => { :images => @article.images} %>
     <h2>Gallery 2</h2>
@@ -88,6 +88,7 @@ $(document).ready(function() {
 			});
 			
 			$("a.del_image").live("click", function() {
+				var img = <%= image_tag @article.default_image.photo.url(:thumb) %>;
         var image_id = $(this).attr("name:image_id");
         var del_url = "/images/" + image_id + "/delete";
         var confirmBox;
