@@ -16,8 +16,9 @@
     <h2>Gallery 2</h2>
   <ul class="gallery container clearfix">
     <% @article.images.each do |image| %>
-      <li id="img_<%= image.id%>" class="img" ><a href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]"><img src="<%= image.photo.url(:thumb) %>"/></a>
-        <a class="del_image" name:image_id="<%= image.id %> href="#" > &times;</a>
+    <li id="img_<%= image.id %>" class="img" >
+      <a href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]"><img src="<%= image.photo.url(:thumb) %>"/></a>
+      <a class="del_image" name:image_id="<%= image.id %>" href="#" >x</a>
     </li>
     <% end %>
   </ul>
