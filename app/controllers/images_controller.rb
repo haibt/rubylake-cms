@@ -15,4 +15,18 @@ class ImagesController < ApplicationController
     end
     @images = Image.all
   end
+
+  def destroy
+    @image = Image.find_by_id params[:id]
+    if @image 
+      if @image.destroy
+      
+      render :json => {:result => "true", :message => "Image was delete successfull" }
+      else
+        render :json => {:result => "false", :message => "Fail to delete the message" }
+      end
+    else
+      render :json => {:result => "false", :message => "Not found object to image" } 
+    end
+  end
 end

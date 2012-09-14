@@ -8,6 +8,8 @@ class ArticlesController < ApplicationController
 
   def edit
   end
+  def vd
+  end
 
   def move
     if request.get?
@@ -35,7 +37,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update_attributes(params[:article])
-        format.html { redirect_to "/article/#{@article.permalink}", notice: 'article was successfully updated.' }
+        format.html { redirect_to "/article/#{@article.permalink}" }
         format.json { head :no_content }
         flash[:notice] = "You have successfully to update the article: #{@article.title}"
         

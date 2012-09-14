@@ -102,5 +102,28 @@ p.user{
   float:right;
   margin:0 20px 10px 0;
 }
+ul.gallery {
+  border:1px solid #e4e4e4;
+  background:#f4f4f4;
+}
+ul.gallery li{
+  display:inline;
+  padding:10px;
+}
+ul.gallery li.img {
+   display: inline;
+   position:relative;
+  
+    }
+
+a.del_image{
+  position:absolute;
+  z-index:1000;
+  color:red;
+  top:0px;
+  right:-5px;
+   cursor: pointer;
+  
+}
 
 

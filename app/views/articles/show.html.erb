@@ -13,7 +13,14 @@
   <%= image_tag @article.default_image.photo.url(:thumb) %>
   <br/>
   <%= render :partial => "upload_images", :locals => { :images => @article.images} %>
-  
+    <h2>Gallery 2</h2>
+  <ul class="gallery container clearfix">
+    <% @article.images.each do |image| %>
+      <li id="img_<%= image.id%>" class="img" ><a href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]"><img src="<%= image.photo.url(:thumb) %>"/></a>
+        <a class="del_image" name:image_id="<%= image.id %> href="#" > &times;</a>
+    </li>
+    <% end %>
+  </ul>
   <% if @article.updatable_by?(current_user) %>
   <div align="right">
     <%= link_to 'Edit', { :action => 'edit', :permalink => @article.permalink }, :class => "btn btn-primary" %>
@@ -78,6 +85,38 @@ $(document).ready(function() {
 					});
 				}
 			});
+			
+			$("a.del_image").live("click", function() {
+        var image_id = $(this).attr("name:image_id");
+        var del_url = "/images/" + image_id + "/delete";
+        var confirmBox;
+        confirmBox = confirm("Are you sure to delete the image ?");
+        if (confirmBox == true) {
+          $.ajax({
+            url : del_url,
+            type : "POST",
+            dataType : "json",
+            success : function(response) {
+              if (response.result) {
+                $("#img_" + image_id).hide();
+                var new_success = $("#success_message_temp").clone();
+                $(new_success).find("strong").html(response.message);
+                $("#main_messages").append(new_success);
+                $(new_success).show();
+              } else {
+                var new_error = $("#error_message_temp").clone();
+                $(new_error).find("strong").html(response.message);
+                $("#main_messages").append(new_error);
+                $(new_error).show();
+              }
+            }
+          });
+        }
+      });
+			
+			 $("area[rel^='prettyPhoto']").prettyPhoto();
+        $("a.gallery:first a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square',slideshow:3000,autoplay_slideshow: false});
+     
 	});		
 </script>	
 

@@ -1,9 +1,18 @@
 <div class="span6 featured <%= "first-child" if index && index == 0 %>" >
-	<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />
-	<p class="by">By: <%= article.user.email if article.user %></p>
-	<div class="only-featured">
-		<img src="/images/default_medium.png">
-		<p class="description"><%= article.description %></p>
-	</div>
-	<p class="redmore"><%= link_to 'Read More', "/article/#{article.permalink}"%> &hellip;</p>
+  <p class="title">
+    <%= link_to article.title, "/article/#{article.permalink}"%>
+  </p>
+  <br />
+  <p class="by">
+    By: <%= article.user.email if article.user %>
+  </p>
+  <div class="only-featured">
+    <%= image_tag article.default_image.photo.url(:thumb) %>
+    <p class="description">
+      <%= article.description %>
+    </p>
+  </div>
+  <p class="redmore">
+    <%= link_to 'Read More', "/article/#{article.permalink}"%> &hellip;
+  </p>
 </div>
