@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
   attr_accessible :article_id, :is_main, :is_public,:photo
   has_attached_file :photo, 
                     :styles => {
-                    :thumb => "150x150>", 
+                    :thumb => "250x250>", 
                     :medium => "400x400>"}, 
                     :default_url => '/images/member_default_thumb.jpg'
   

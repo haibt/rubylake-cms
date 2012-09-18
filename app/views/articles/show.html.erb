@@ -13,9 +13,7 @@
   <p class="content">
     <%= raw @article.content %>
   </p>
-  <div class="img-df">
-    <%= image_tag @article.default_image.photo.url(:thumb) %>
-  </div>
+ <div id="img-df"> <%= image_tag @article.default_image.photo.url(:thumb) %></div>
   <br/>
   <%= render :partial => "upload_images", :locals => { :images => @article.images} %>
   <%= render :partial => "show_gallery"%>
@@ -60,5 +58,58 @@
     <%= render :partial => "version_history", :locals => { :articles => @articles } %>
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+		$("a.del_article").live("click", function() {
+				var article_id = <%= @article.id %>;
+				var del_url = "/articles/" + article_id + "/delete";
+				var confirmBox;
+				confirmBox = confirm("Are you sure to delete the article ?");
+				if (confirmBox == true) {
+					$.ajax({
+						url : del_url,
+						type : "POST",
+						dataType : "json",
+						success : function(response) {
+							if (response.result) {
+								$(".del-article").show().alert('close');
+							} else {
+								$(".del-article-error").show().alert('close');
+							}
+						}
+					});
+				}
+			});
+			
+			$("a.del_image").live("click", function() {
+				var img = <%= image_tag @article.default_image.photo.url(:thumb) %>;
+        var image_id = $(this).attr("name:image_id");
+        var del_url = "/images/" + image_id + "/delete";
+        var confirmBox;
+        confirmBox = confirm("Are you sure to delete the image ?");
+        if (confirmBox == true) {
+          $.ajax({
+            url : del_url,
+            type : "POST",
+            dataType : "json",
+            success : function(response) {
+              if (response.result) {
+                $("#img_" + image_id).hide();
+                var new_success = $("#success_message_temp").clone();
+                $(new_success).find("strong").html(response.message);
+                $("#main_messages").append(new_success);
+                $(new_success).show();
+              } else {
+                var new_error = $("#error_message_temp").clone();
+                $(new_error).find("strong").html(response.message);
+                $("#main_messages").append(new_error);
+                $(new_error).show();
+              }
+            }
+          });
+        }
+      });
+</script>	
+
 
 

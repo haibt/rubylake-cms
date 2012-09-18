@@ -1,6 +1,6 @@
 <div class="span6 version">
   <b> Versions List </b><br/>
-  <% @article.versions.each do |version|%>
+  <% @article.versions.limit(1).each do |version|%>
   <a id="event" style="cursor: pointer"> <%= version.event%></a>
   <div>
     <%= version.created_at%>
