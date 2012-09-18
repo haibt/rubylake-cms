@@ -1,7 +1,10 @@
-
-<div class="container" style="display:block;"> 
-  <p class="title"><%= @article.title %></p>
-  <p class="time"><%= @article.created_at%></p>
+<div class="container" style="display:block;">
+  <p class="title">
+    <%= @article.title %>
+  </p>
+  <p class="time">
+    <%= @article.created_at%>
+  </p>
   <br/>
   <p class="description">
     <%= @article.description %>
@@ -10,18 +13,12 @@
   <p class="content">
     <%= raw @article.content %>
   </p>
-  <%= image_tag @article.default_image.photo.url(:thumb) %>
+  <div class="img-df">
+    <%= image_tag @article.default_image.photo.url(:thumb) %>
+  </div>
   <br/>
   <%= render :partial => "upload_images", :locals => { :images => @article.images} %>
-    <h2>Gallery 2</h2>
-  <ul class="gallery container clearfix">
-    <% @article.images.each do |image| %>
-    <li id="img_<%= image.id %>" class="img" >
-      <a href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]"><img src="<%= image.photo.url(:thumb) %>"/></a>
-      <a class="del_image" name:image_id="<%= image.id %>" href="#" >x</a>
-    </li>
-    <% end %>
-  </ul>
+  <%= render :partial => "show_gallery"%>
   <% if @article.updatable_by?(current_user) %>
   <div align="right">
     <%= link_to 'Edit', { :action => 'edit', :permalink => @article.permalink }, :class => "btn btn-primary" %>
@@ -39,87 +36,29 @@
 <br/>
 
 <div class="container" style="display:block;">
-	<h3>More news...</h3>
-	<ul>
-		<% @article.related_articles.each do |article| %>
-		<li>
-			<%= link_to article.title, "/article/#{article.permalink}" %>
-		</li>
-		<% end %>
-	</ul>
+  <h3>More news...</h3>
+  <ul>
+    <% @article.related_articles.each do |article| %>
+    <li>
+      <%= link_to article.title, "/article/#{article.permalink}" %>
+    </li>
+    <% end %>
+  </ul>
 </div>
 <br/>
 <br/>
 <br/>
 
 <div class="container" style="display:block;">
-	<% if @article.category && @article.category.is_blog? %>
-	<%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
-	<% else %>
-	<%= render :partial => "public_comments" %>
-	<% end %>
+  <% if @article.category && @article.category.is_blog? %>
+  <%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
+  <% else %>
+  <%= render :partial => "public_comments" %>
+  <% end %>
 
-
-<div class="row-fluid" style="display:block;">
-	<%= render :partial => "version_history", :locals => { :articles => @articles } %>
+  <div class="row-fluid" style="display:block;">
+    <%= render :partial => "version_history", :locals => { :articles => @articles } %>
+  </div>
 </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function() {
-		$("a.del_article").live("click", function() {
-				var article_id = <%= @article.id %>;
-				var del_url = "/articles/" + article_id + "/delete";
-				var confirmBox;
-				confirmBox = confirm("Are you sure to delete the article ?");
-				if (confirmBox == true) {
-					$.ajax({
-						url : del_url,
-						type : "POST",
-						dataType : "json",
-						success : function(response) {
-							if (response.result) {
-								$(".del-article").show().alert('close');
-							} else {
-								$(".del-article-error").show().alert('close');
-							}
-						}
-					});
-				}
-			});
-			
-			$("a.del_image").live("click", function() {
-        var image_id = $(this).attr("name:image_id");
-        var del_url = "/images/" + image_id + "/delete";
-        var confirmBox;
-        confirmBox = confirm("Are you sure to delete the image ?");
-        if (confirmBox == true) {
-          $.ajax({
-            url : del_url,
-            type : "POST",
-            dataType : "json",
-            success : function(response) {
-              if (response.result) {
-                $("#img_" + image_id).hide();
-                var new_success = $("#success_message_temp").clone();
-                $(new_success).find("strong").html(response.message);
-                $("#main_messages").append(new_success);
-                $(new_success).show();
-              } else {
-                var new_error = $("#error_message_temp").clone();
-                $(new_error).find("strong").html(response.message);
-                $("#main_messages").append(new_error);
-                $(new_error).show();
-              }
-            }
-          });
-        }
-      });
-			
-			 $("area[rel^='prettyPhoto']").prettyPhoto();
-        $("a.gallery:first a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square',slideshow:3000,autoplay_slideshow: false});
-     
-	});		
-</script>	
-
 
 
