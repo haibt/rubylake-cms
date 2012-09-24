@@ -4,14 +4,15 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find_by_permalink params[:permalink]
+    @theme = Theme.active.all
   end
 
   def edit
-  end
-  def vd
+     @theme = Theme.active.all
   end
 
   def move
+     @theme = Theme.active.all
     if request.get?
       @categories = Category.all
       
@@ -61,6 +62,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @theme = Theme.active.all
     @article = Article.new
     respond_to do |format|
       format.html # new.html.erb
@@ -69,6 +71,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
+     @theme = Theme.active.all
     @article = Article.new(params[:article])
     respond_to do |format|
       @article.user_id = current_user.id

@@ -13,9 +13,12 @@
     <link rel="stylesheet" href="path/to/your/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
     <script src="path/to/your/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
   </head>
-  <body>
+  
+  <% @theme.each do |theme|%>
+ 	<body style="background:<%= theme.color_background_body %>;background-image:url('<%= theme.img_bg.url %>')  ">
+ 
     <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
+      <div class="navbar-inner" style="background:<%= theme.color_background_menu %> ">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
           <a class="brand" href="/"><i class="icon-home icon-white"></i>Scrum2B</a>
@@ -114,8 +117,8 @@
 
     </div>
 
-    <div class="footer">
-      <div class="container">
+    <div class="footer" >
+      <div class="container" style="background: <%= theme.color_background_article %>;padding:5px">
         <p class="pull-right">
           <a href="#">Back to top</a>
         </p>
@@ -130,7 +133,7 @@
         </p>
       </div>
     </div>
-
+ <% end%>
   </body>
   <script type="text/javascript">
     $(document).ready(function() {

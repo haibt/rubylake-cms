@@ -1,5 +1,6 @@
-<div class="span3 article-new <%= "first-child" if index && index == 0 %>">
-
+<% @theme.each do |theme|%>
+<div class="span3 article-new <%= "first-child" if index && index == 0 %>" style="background: <%= theme.color_background_article %>">
+<% end %>
   <p class="title">
     <%= link_to article.title, "/article/#{article.permalink}"%>
   </p>

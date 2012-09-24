@@ -1,6 +1,8 @@
-<div class="container">
+<% @theme.each do |theme|%>
+<div class="container" style="background: <%= theme.color_background_article %>;padding:10px">
 <h1>Create Article</h1>
 	<%= render 'form' %>
 </div>
+<% end %>
 
 

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   
   def set_main_menus
     @main_menus = Menu.main.all
+    @theme = Theme.active.all
   end
   
   protected
