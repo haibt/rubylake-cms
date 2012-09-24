@@ -8,7 +8,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+<<<<<<< HEAD
      @theme = Theme.active.all
+=======
+>>>>>>> origin/develop
   end
 
   def move
