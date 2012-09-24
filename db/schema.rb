@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910043102) do
+ActiveRecord::Schema.define(:version => 20120921022221) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -106,6 +106,19 @@ ActiveRecord::Schema.define(:version => 20120910043102) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "themes", :force => true do |t|
+    t.string   "color_background_body"
+    t.string   "color_background_menu"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.string   "color_background_article"
+    t.string   "img_bg_file_name"
+    t.string   "img_bg_content_type"
+    t.integer  "img_bg_file_size"
+    t.datetime "img_bg_updated_at"
+    t.boolean  "is_active",                :default => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

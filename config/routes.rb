@@ -20,7 +20,6 @@ RubyLakeCms::Application.routes.draw do
     match "/login/restore-password" => "devise/passwords#create" # Add a Custom Route for Forgot password
   end
   match '/profile' => 'home#profile'
-  match '/article/vd' =>'articles#vd'
   get '/article/new' => 'articles#new'
   post '/article/create' => 'articles#create'
   get '/article/:permalink/edit' => 'articles#edit'
@@ -47,7 +46,7 @@ RubyLakeCms::Application.routes.draw do
   post '/images/uploadFile' => 'images#uploadFile'
   post '/images/:id/delete'=> 'images#destroy'
   resources :home
-  # Sample of regular route:
+    # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
