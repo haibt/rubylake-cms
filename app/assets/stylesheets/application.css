@@ -31,10 +31,6 @@ ul, li {
   border-top: 1px solid #E5E5E5;
 }
 
-.comments textarea {
-  width: 500px;
-  height: 100px;
-}
 .version {
   background: #eeeeee;
   color: #000000;

@@ -1,4 +1,6 @@
-<div class="hero-unit ">
+<% @theme.each do |theme|%>
+<div class="hero-unit " style="background: <%= theme.color_background_article %>">
+	<% end %>
   <h1>Profile Heading</h1>
   <p>Tagline</p>
   <p>

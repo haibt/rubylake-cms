@@ -47,7 +47,7 @@ RubyLakeCms::Application.routes.draw do
   post '/images/:id/delete'=> 'images#destroy'
   match '/images/:id/set_default'=> 'images#set_default'
   resources :home
-  # Sample of regular route:
+    # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 

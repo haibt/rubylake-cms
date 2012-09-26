@@ -19,8 +19,8 @@
 
 .title{
   font-size:25px;
-  color:#005588;
   font-weight:bold;
+  color:#0088CC;  
 }
 
 .time{
@@ -36,6 +36,9 @@
 
 .main img{
   margin:15px auto;
+}
+.comments{
+  margin-bottom:10px;
 }
 .div_comment{
   padding-left: 10px;
@@ -59,6 +62,7 @@
  height:70px;
   width:70px;
   float:left;
+  margin:10px 0 0 0;
 }
 p.user{
   margin:10px 0 0 80px;
@@ -81,7 +85,7 @@ p.user{
 .form_comment #comment_button{
   position:absolute;
   right:20px;
-  bottom:-50px;
+  bottom:-65px;
 }
 #text_comment{
   margin-top:20px;

@@ -1,4 +1,6 @@
-<div class="blog-article">
+<% @theme.each do |theme|%>
+<div class="blog-article" style="background: <%= theme.color_background_article %>">
+	<% end %>
 	<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />	
 	<% @user.each do |user| %>
       <% if user.id == article.user_id %>

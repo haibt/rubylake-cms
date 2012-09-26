@@ -1,10 +1,7 @@
-<div class="container" style="display:block;">
-  <p class="title">
-    <%= @article.title %>
-  </p>
-  <p class="time">
-    <%= @article.created_at%>
-  </p>
+<% @theme.each do |theme|%>
+<div class="container" style="display:block;background: <%= theme.color_background_article %>;padding:10px"> 
+	<p class="title" ><%= @article.title %></p>
+  <p class="time"><%= @article.created_at%></p>
   <br/>
   <p class="description">
     <%= @article.description %>
@@ -28,33 +25,31 @@
     <%= link_to 'Create New', {:action=>'new'}, :class => "btn btn-primary" %>
   </div>
   <% end %>
-</div>
-<br/>
-<br/>
-<br/>
-
-<div class="container" style="display:block;">
-  <h3>More news...</h3>
-  <ul>
-    <% @article.related_articles.each do |article| %>
-    <li>
-      <%= link_to article.title, "/article/#{article.permalink}" %>
-    </li>
-    <% end %>
-  </ul>
-</div>
-<br/>
-<br/>
-<br/>
-
+	<div class="container" style="margin-bottom: 30px;">
+		<h3>More news...</h3>
+		<ul>
+			<% @article.related_articles.each do |article| %>
+			<li>
+				<%= link_to article.title, "/article/#{article.permalink}" %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="container" >
+		<% if @article.category && @article.category.is_blog? %>
+		<%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
+		<% else %>
+		<%= render :partial => "public_comments" %>
+		<% end %>
+	</div>
 <div class="container" style="display:block;">
   <% if @article.category && @article.category.is_blog? %>
   <%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
   <% else %>
   <%= render :partial => "public_comments" %>
   <% end %>
-
 </div>
+<% end %>
 <script type="text/javascript">
 $(document).ready(function() {
 		$("a.del_article").live("click", function() {
@@ -77,7 +72,7 @@ $(document).ready(function() {
 					});
 				}
 			});			
-			
+
 			$("a.del_img").live("click", function() {
         var image_id = $(this).attr("rubylake:image_id");
         var del_url = "/images/" + image_id + "/delete";
@@ -105,8 +100,9 @@ $(document).ready(function() {
           });
         }
       });
-            $("a.set_default").live("click", function() {
-              alert('tests');
+
+      $("a.set_default").live("click", function() {
+        alert('tests');
         var image_id = $(this).attr("rubylake:image_id");
         var set_default_url = "/images/" + image_id + "/set_default";
         var confirmBox;
