@@ -5,7 +5,7 @@
 	/* ----------------------------------
 		Default Theme
 	----------------------------------- */
-
+  div.pp_pic_holder {width:500px !important;position:relative}
 	div.pp_default .pp_top,
 	div.pp_default .pp_top .pp_middle,
 	div.pp_default .pp_top .pp_left,
@@ -34,7 +34,7 @@
 	div.pp_default .pp_gallery ul li a { background: url(../images/prettyPhoto/default/default_thumb.png) center center #f8f8f8; border:1px solid #aaa; }
 	div.pp_default .pp_gallery ul li a:hover,
 	div.pp_default .pp_gallery ul li.selected a { border-color: #fff; }
-	div.pp_default .pp_social { margin-top: 7px; }
+	div.pp_default .pp_social { margin:7px 0 0 100px;  }
 
 	div.pp_default .pp_gallery a.pp_arrow_previous,
 	div.pp_default .pp_gallery a.pp_arrow_next { position: static; left: auto; }
@@ -523,3 +523,25 @@
 			margin: 0 0 5px 15px;
 			z-index: 9999;
 		}
+		.del_img{
+		  position: absolute;
+		  right:-50px;top:-300px
+		  
+		}
+		.set_default{
+		  position:absolute;
+		  right:-60px;top:-250px;
+		  margin: 0 -10px 5px 5px;
+		}
+		
+
+
+
+
+
+
+
+
+
+
+

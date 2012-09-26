@@ -1,11 +1,11 @@
 class ImagesController < ApplicationController
-  def index
-    @images = Image.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @images }
-    end
-  end
+  # def index
+    # @images = Image.new
+    # respond_to do |format|
+      # format.html # new.html.erb
+      # format.json { render json: @images }
+    # end
+  # end
 
   def uploadFile
     @images = Image.new(params[:image])
@@ -28,5 +28,17 @@ class ImagesController < ApplicationController
     else
       render :json => {:result => "false", :message => "Not found object to image" } 
     end
+  end
+  
+  def set_default
+    @image = Image.find_by_id params[:id]
+    if @image
+    @image.is_main = true
+    @image.update_attributes(params[:image])
+  end
+  end 
+  def current_user_could_upload?
+     @image = Image.find(params[:id])
+     redirect_to "/" unless @image && @image.upload_by?(current_user)
   end
 end
