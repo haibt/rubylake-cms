@@ -45,8 +45,15 @@ RubyLakeCms::Application.routes.draw do
   resources :images
   post '/images/uploadFile' => 'images#uploadFile'
   post '/images/:id/delete'=> 'images#destroy'
-  resources :home
-    # Sample of regular route:
+  resources :settings
+  match '/setting/index' => 'settings#index'
+  post '/setting/create'=> 'settings#create'
+  resources :themes
+  match 'theme/index' => 'themes#index'
+  match 'theme/message' => 'themes#message'
+ 
+  #post 'home/setting/new' => 'company#create'
+  # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
