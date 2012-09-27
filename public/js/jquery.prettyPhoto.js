@@ -8,7 +8,14 @@
 	$.prettyPhoto = {version: '3.1.4'};
 	
 	$.fn.prettyPhoto = function(pp_settings) {
+	  var image_id = "";
+	  if($(this).attr("href") !== undefined ) {
+	    image_id = $(this).attr("rubylake:image_id");
+	  }
+//	  alert(image_id);
+	
 		pp_settings = jQuery.extend({
+		  image_id: image_id,
 			hook: 'rel', /* the attribute tag to use for prettyPhoto hooks. default: 'rel'. For HTML5, use "data-rel" or similar. */
 			animation_speed: 'fast', /* fast/slow/normal */
 			ajaxcallback: function() {},
@@ -62,6 +69,8 @@
 											<p class="pp_description"></p> \
 											<div class="pp_social">{pp_social}</div> \
 											<a class="pp_close" href="#">Close</a> \
+											<a class="del_img" rubylake:image_id="' + image_id + '" href="#">Delete</a> \
+										  <a class="set_default" href="#">SetDefault</a> \
 										</div> \
 									</div> \
 								</div> \
@@ -491,7 +500,10 @@
 				delete settings;
 			});
 		};
-	
+		/**
+		 * Delete image 
+		 */
+
 		/**
 		* Set the proper sizes on the containers and animate the content in.
 		*/
