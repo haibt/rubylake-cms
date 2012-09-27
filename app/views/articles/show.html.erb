@@ -1,17 +1,6 @@
-<<<<<<< HEAD
-<% @theme.each do |theme|%>
-<div class="container" style="display:block;background: <%= theme.color_background_article %>;padding:10px"> 
+<div class="container" style="display:block;background: <%= @theme.color_background_article %>;padding:10px"> 
 	<p class="title" ><%= @article.title %></p>
   <p class="time"><%= @article.created_at%></p>
-=======
-<div class="container" style="display:block;">
-  <p class="title">
-    <%= @article.title %>
-  </p>
-  <p class="time">
-    <%= @article.created_at%>
-  </p>
->>>>>>> origin/develop
   <br/>
   <p class="description">
     <%= @article.description %>
@@ -46,7 +35,7 @@
 		</ul>
 	</div>
 
-<<<<<<< HEAD
+
 	<div class="container" >
 		<% if @article.category && @article.category.is_blog? %>
 		<%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
@@ -57,34 +46,10 @@
 			<%= render :partial => "version_history", :locals => { :articles => @articles } %>
 		</div>
 	</div>
-=======
-<div class="container" style="display:block;">
-  <h3>More news...</h3>
-  <ul>
-    <% @article.related_articles.each do |article| %>
-    <li>
-      <%= link_to article.title, "/article/#{article.permalink}" %>
-    </li>
-    <% end %>
-  </ul>
-</div>
-<br/>
-<br/>
-<br/>
 
-<div class="container" style="display:block;">
-  <% if @article.category && @article.category.is_blog? %>
-  <%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
-  <% else %>
-  <%= render :partial => "public_comments" %>
-  <% end %>
 
-  <div class="row-fluid" style="display:block;">
-    <%= render :partial => "version_history", :locals => { :articles => @articles } %>
-  </div>
->>>>>>> origin/develop
 </div>
-<% end %>
+
 <script type="text/javascript">
 $(document).ready(function() {
 		$("a.del_article").live("click", function() {
@@ -110,8 +75,7 @@ $(document).ready(function() {
 			
 			$("a.del_image").live("click", function() {
 				var img = <%= image_tag @article.default_image.photo.url(:thumb) %>;
-<<<<<<< HEAD
-		        var image_id = $(this).attr("name:image_id");
+				var image_id = $(this).attr("name:image_id");
 		        var del_url = "/images/" + image_id + "/delete";
 		        var confirmBox;
 		        confirmBox = confirm("Are you sure to delete the image ?");
@@ -136,40 +100,7 @@ $(document).ready(function() {
 		            }
 		          });
 		        }
-     		 });
-			
-			 $("area[rel^='prettyPhoto']").prettyPhoto();
-        $("a.gallery:first a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square',slideshow:3000,autoplay_slideshow: false});
-     
-	});		
-=======
-        var image_id = $(this).attr("name:image_id");
-        var del_url = "/images/" + image_id + "/delete";
-        var confirmBox;
-        confirmBox = confirm("Are you sure to delete the image ?");
-        if (confirmBox == true) {
-          $.ajax({
-            url : del_url,
-            type : "POST",
-            dataType : "json",
-            success : function(response) {
-              if (response.result) {
-                $("#img_" + image_id).hide();
-                var new_success = $("#success_message_temp").clone();
-                $(new_success).find("strong").html(response.message);
-                $("#main_messages").append(new_success);
-                $(new_success).show();
-              } else {
-                var new_error = $("#error_message_temp").clone();
-                $(new_error).find("strong").html(response.message);
-                $("#main_messages").append(new_error);
-                $(new_error).show();
-              }
-            }
-          });
-        }
       });
->>>>>>> origin/develop
 </script>	
 
 

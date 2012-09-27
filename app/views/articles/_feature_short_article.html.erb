@@ -1,5 +1,8 @@
-<% @theme.each do |theme|%>
-<div class="span6 featured <%= "first-child" if index && index == 0 %>" style="background: <%= theme.color_background_article %>">
+<% if @theme %>
+<div class="span6 featured <%= "first-child" if index && index == 0 %>" style="background: <%= @theme.color_background_article %>">
+  <% else %>
+  <div class="span6 featured <%= "first-child" if index && index == 0 %>" >
+<% end %>
   <p class="title">
     <%= link_to article.title, "/article/#{article.permalink}"%>
   </p>
@@ -17,4 +20,3 @@
     <%= link_to 'Read More', "/article/#{article.permalink}"%> &hellip;
   </p>
 </div>
-<% end %>

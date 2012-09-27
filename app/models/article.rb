@@ -17,6 +17,7 @@ class Article < ActiveRecord::Base
     @default_image = images.new unless @default_image
     return @default_image 
   end
+  
 
   #validates_attachment_presence :photo
   #validates_attachment_size :photo, :less_than => 5.megabytes

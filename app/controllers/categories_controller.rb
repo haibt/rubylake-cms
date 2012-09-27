@@ -1,16 +1,22 @@
 class CategoriesController < ApplicationController
 
+  before_filter :default_theme, :only => [:edit, :move, :create,:show]
+  
   def show
+    @theme = default_theme
     @category = Category.find_by_permalink params[:permalink]
     @articles = @category.articles.public.live.order("updated_at DESC")
+   
   end
 
   def index
+    @theme = default_theme
     @categories = Category.all
     @articles = Article.live.public.order("updated_at DESC")
   end
 
   def new
+    @theme = default_theme
     @category = Category.new
     respond_to do |format|
       format.html # new.html.erb

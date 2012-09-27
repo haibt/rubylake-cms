@@ -17,8 +17,9 @@ before_filter :authenticate_user!
       #end
     else
       clean_up_passwords(resource)
-      render_with_scope :new
+     # render_with_scope :new
+     redirect_to '/login'
     end
   end
-  
+    
 end

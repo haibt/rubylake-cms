@@ -1,21 +1,23 @@
 class ArticlesController < ApplicationController
 
   before_filter :current_user_could_update?, :only => [:edit, :move, :update, :delete, :create]
-
+  before_filter :default_theme, :only => [:edit, :move, :create,:show]
+  def index
+    
+  end
   def show
     @article = Article.find_by_permalink params[:permalink]
-    @theme = Theme.active.all
+    @theme = default_theme
   end
 
   def edit
-<<<<<<< HEAD
-     @theme = Theme.active.all
-=======
->>>>>>> origin/develop
+
+     @theme = default_theme
+
   end
 
   def move
-     @theme = Theme.active.all
+     @theme = default_theme
     if request.get?
       @categories = Category.all
       
@@ -65,7 +67,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @theme = Theme.active.all
+    @theme = default_theme
     @article = Article.new
     respond_to do |format|
       format.html # new.html.erb
@@ -74,7 +76,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-     @theme = Theme.active.all
+    @theme = default_theme
     @article = Article.new(params[:article])
     respond_to do |format|
       @article.user_id = current_user.id
@@ -96,5 +98,7 @@ class ArticlesController < ApplicationController
     @article = Article.find_by_permalink params[:permalink]
     redirect_to "/" unless @article && @article.updatable_by?(current_user)
   end
+  
+  
 
 end
