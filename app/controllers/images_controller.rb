@@ -6,7 +6,7 @@ class ImagesController < ApplicationController
       # format.json { render json: @images }
     # end
   # end
-
+  before_filter :check_img?,:only => :set_default
   def uploadFile
     @images = Image.new(params[:image])
     respond_to do |format|
@@ -32,13 +32,18 @@ class ImagesController < ApplicationController
   
   def set_default
     @image = Image.find_by_id params[:id]
-    if @image
-    @image.is_main = true
-    @image.update_attributes(params[:image])
-  end
+    @image.update_attribute(:is_main,true)
+    render :json => {:result => "true", :message => "Image was setted default successfull" }
   end 
   def current_user_could_upload?
      @image = Image.find(params[:id])
      redirect_to "/" unless @image && @image.upload_by?(current_user)
   end
-end
+  private
+  def check_img?
+    @image = Image.main.all
+    @image.each do |img|
+      img.update_attribute(:is_main, false)
+    end
+  end
+  end

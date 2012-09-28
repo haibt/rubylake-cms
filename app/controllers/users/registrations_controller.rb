@@ -4,7 +4,7 @@ before_filter :authenticate_user!
     build_resource
     if resource.save
       #UserMailer.delay.register(resource.id).deliver
-      UserMailer.register(resource.id).deliver
+      #UserMailer.register(resource.id).deliver
       #if resource.active?
         set_flash_message :notice, :signed_up
         sign_in_and_redirect(resource_name, resource)
@@ -18,7 +18,7 @@ before_filter :authenticate_user!
     else
       clean_up_passwords(resource)
       #render_with_scope :new
-      redirect_to "/login"
+      redirect_to '/login'
     end
   end
   

@@ -39,8 +39,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  private
-
+  private 
   def check_commentable_object!
     Rails.logger.info "parameter 1: #{params[:comment].to_s}"
     if(params[:comment] && params[:comment][:commentable_type])
@@ -56,5 +55,4 @@ class CommentsController < ApplicationController
     return true if @comment 
     render :json => {:result => "false", :message => "Not found object to comment" }
   end
-  
 end
