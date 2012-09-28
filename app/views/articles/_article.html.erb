@@ -1,6 +1,9 @@
-<div class="span3 article-new <%= "first-child" if index && index == 0 %>">
+
+<div class="span3 article-new <%= "first-child" if index && index == 0 %>" style="background: <%= @theme.color_background_article %>">
+	
 	<p class="title"><%= link_to article.title, "/article/#{article.permalink}"%></p><br />	
     <p class="by">By: <%= article.user.email if article.user %></p>
     <%= image_tag article.default_image.photo.url(:thumb) %>
     <p class="redmore"><%= link_to 'Read More', "/article/#{article.permalink}"%> &hellip;</p>
 </div>
+

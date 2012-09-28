@@ -1,5 +1,4 @@
-<% @theme.each do |theme|%>
-<div class="container" style="display:block;background: <%= theme.color_background_article %>;padding:10px"> 
+<div class="container" style="display:block;background: <%= @theme.color_background_article %>;padding:10px"> 
 	<p class="title" ><%= @article.title %></p>
   <p class="time"><%= @article.created_at%></p>
   <br/>
@@ -42,7 +41,6 @@
   <%= render :partial => "public_comments" %>
   <% end %>
 </div>
-<% end %>
 <script type="text/javascript">
 $(document).ready(function() {
 		$("a.del_article").live("click", function() {
@@ -64,9 +62,10 @@ $(document).ready(function() {
 						}
 					});
 				}
-			});			
-			
-		$("a.del_img").live("click", function() {
+
+			});
+
+	$("a.del_img").live("click", function() {
         var image_id = $(this).attr("rubylake:image_id");
         alert('step2: '+ image_id);
         var del_url = "/images/" + image_id + "/delete";

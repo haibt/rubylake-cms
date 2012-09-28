@@ -1,6 +1,6 @@
 <h1>Move Article</h1>
-<% @theme.each do |theme|%>
-<div class="container" style="background: <%= theme.color_background_article %>;padding:10px">
+
+<div class="container" style="background: <%= @theme.color_background_article %>;padding:10px">
 	<p>Title: <span><%= @article.title %></span></p>
 	
 	<%= form_for :article do |f| %>
@@ -25,4 +25,3 @@
   </div>
 	<% end %>
 </div>
-<% end %>
