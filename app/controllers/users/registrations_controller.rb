@@ -3,7 +3,6 @@ before_filter :authenticate_user!
   def create
     build_resource
     if resource.save
-      
       #UserMailer.delay.register(resource.id).deliver
       #UserMailer.register(resource.id).deliver
       #if resource.active?
@@ -18,10 +17,12 @@ before_filter :authenticate_user!
       #  redirect_to after_inactive_sign_up_path_for(resource)
       #end
     else
-      clean_up_passwords(resource)
       #render_with_scope :new
-      redirect_to "/login"
+
+      redirect_to '/login'
+
     end
+
   end
 
 end

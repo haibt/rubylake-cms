@@ -2,8 +2,8 @@
   <ul class="gallery container clearfix">
     <% @article.images.each do |image| %>
   <li id="img_<%= image.id %>" class="img" >
-    <a rubylake:image_id="<%= image.id %>" href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]"><img src="<%= image.photo.url(:thumb) %>"/></a>
-    <a class="del_img" rubylake:image_id="<%= image.id %>" href="#" >x</a>
+    <a rubylake:image_id="<%= image.id %>" href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]" p="<%=image.id%>"><p><%=image.id%></p><img src="<%= image.photo.url(:thumb) %>"/></a>
+    <a class="del_img" rubylake:image_id="<%= image.id %>"href ="#" >x</a>
     <a class= "set_default" rubylake:image_id="<%= image.id %>"href ="#">setdefault</a>
   </li>
   <% end %>
