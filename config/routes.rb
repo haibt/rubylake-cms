@@ -1,4 +1,8 @@
 RubyLakeCms::Application.routes.draw do
+  get "setup/setting"
+
+  get "setup/settings"
+
   mount Ckeditor::Engine => '/ckeditor'
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -18,7 +22,9 @@ RubyLakeCms::Application.routes.draw do
     match "/logout" => "devise/sessions#destroy" # Add a custom sing out route for user sign out
     match "/login/forgot-password" => "devise/passwords#new" # Add a Custom Route for Forgot password
     match "/login/restore-password" => "devise/passwords#create" # Add a Custom Route for Forgot password
+    
   end
+ 
   match '/profile' => 'home#profile'
   get '/article/new' => 'articles#new'
   post '/article/create' => 'articles#create'
@@ -45,14 +51,20 @@ RubyLakeCms::Application.routes.draw do
   resources :images
   post '/images/uploadFile' => 'images#uploadFile'
   post '/images/:id/delete'=> 'images#destroy'
-
-  resources :settings
-  match '/setting/index' => 'settings#index'
-  post '/setting/create'=> 'settings#create'
-  resources :themes
-  match 'theme/index' => 'themes#index'
-  match 'theme/message' => 'themes#message'
  
+  namespace :setup do
+    resources :setadmins
+    match '/setadmins/new' => 'setadmins#new'
+    post "/setadmins/create_admin" => "setadmins#create_admin"
+    match '/setting/new' => 'settings#new'
+    post '/setting/create'=> 'settings#create'
+    post '/theme/create'=> 'themes#create'
+    match 'theme/new' => 'themes#new'
+    match 'theme/message' => 'themes#message'
+   
+  end
+   
+  
   #post 'home/setting/new' => 'company#create'
   # Sample of regular route:
 

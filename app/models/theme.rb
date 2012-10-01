@@ -3,7 +3,7 @@ class Theme < ActiveRecord::Base
   attr_accessible :color_background_body, :is_active, :color_background_menu, :img_bg,:color_background,:color_title_article, :color_title_menu, :color_background_article
   
   attr_accessible :img_bg
-  has_attached_file :img_bg, :default_url => '/images/anhdep.jpg'
+  has_attached_file :img_bg, :default_url => '/images/img_bg_default.jpg'
   after_save :inactive_other_themes
   
   scope :active, :conditions => ["is_active = ?", true]  

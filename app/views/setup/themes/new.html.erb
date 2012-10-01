@@ -1,0 +1,25 @@
+<%= form_for @theme, :url => 'create'  do |f| %>
+	<div class="field">
+		<%= f.label :color_background_menu %>
+			<br/>
+		<%= f.text_field :color_background_menu %>
+	</div>
+	<div class="field">
+		<%= f.label :color_background_body %>
+			<br/>
+		<%= f.text_field :color_background_body %>
+	</div>
+	<div class="field">
+		<%= f.label :color_background_article %>
+			<br/>
+		<%= f.text_field :color_background_article %>
+	</div>
+	<div>
+		<p>Logo:</p>
+	<%= f.file_field :img_bg %><br />
+	</div>
+	
+	<div class="field">
+		<%= f.submit :class => "btn btn-primary" %>
+	</div>
+  <% end %>

@@ -3,13 +3,15 @@ before_filter :authenticate_user!
   def create
     build_resource
     if resource.save
+      
       #UserMailer.delay.register(resource.id).deliver
-      UserMailer.register(resource.id).deliver
+      #UserMailer.register(resource.id).deliver
       #if resource.active?
         set_flash_message :notice, :signed_up
         sign_in_and_redirect(resource_name, resource)
         #sign_in(resource_name, resource)
         #redirect_to "/dashboard"
+         redirect_to '/login'
       #else
       #  set_flash_message :notice, :inactive_signed_up, :reason => resource.inactive_message.to_s
       #  expire_session_data_after_sign_in!
@@ -21,5 +23,5 @@ before_filter :authenticate_user!
       redirect_to "/login"
     end
   end
-    
+
 end
