@@ -65,9 +65,8 @@ $(document).ready(function() {
 
 			});
 
-	$("a.del_img").live("click", function() {
+	$("a.del_image").live("click", function() {
         var image_id = $(this).attr("rubylake:image_id");
-        alert('step2: '+ image_id);
         var del_url = "/images/" + image_id + "/delete";
         var confirmBox;
         confirmBox = confirm("Are you sure to delete the image ?");
@@ -93,13 +92,16 @@ $(document).ready(function() {
           });
         }
       });
-
+    $("a.del_img_1").live("click", function() {
+      var a = $(this).parent().find("p.pp_id").text();
+     alert(a);
+    });
+    
       $("a.set_default").live("click", function() {
         alert('step1');
         var image_id = $(this).attr("rubylake:image_id");
         var set_default_url = "/images/" + image_id + "/set_default";
         var confirmBox;
-        alert(image_id)
         confirmBox = confirm("Are you sure to set the image to default ?");
         if (confirmBox == true) {
           $.ajax({

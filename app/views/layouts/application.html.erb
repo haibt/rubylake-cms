@@ -10,6 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+	   <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<%if @theme %>
 	<body style="background:<%= @theme.color_background_body %>;background-image:url('<%= @theme.img_bg.url %>')  ">
@@ -155,7 +156,7 @@
 				slideshow : 3000,
 				autoplay_slideshow : false
 			});
-
+			
 		});
 
 	</script>

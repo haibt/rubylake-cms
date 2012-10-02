@@ -8,14 +8,10 @@
   $.prettyPhoto = {version: '3.1.4'};
   
   $.fn.prettyPhoto = function(pp_settings) { 
-     var image_id = "";
-     if($(this).attr("href") !== undefined ) {
-     var image_id = $(this).attr("p");
-     alert('show'+image_id);
-     }
-   
+     var a = $(this).parent().parent().find('p.description').text();
+        //  var image_id = $(this).attr("p");
     pp_settings = jQuery.extend({
-      image_id: image_id,
+      a: a,
       hook: 'rel', /* the attribute tag to use for prettyPhoto hooks. default: 'rel'. For HTML5, use "data-rel" or similar. */
       animation_speed: 'fast', /* fast/slow/normal */
       ajaxcallback: function() {},
@@ -67,9 +63,10 @@
                         <a href="#" class="pp_arrow_next">Next</a> \
                       </div> \
                       <p class="pp_description"></p> \
+                      <p class="pp_id"></p> \
                       <div class="pp_social">{pp_social}</div> \
                       <a class="pp_close" href="#">Close</a> \
-                      <a class="del_img"rubylake:image_id="' + image_id + '"  href="#">Delete</a> \
+                      <a class="del_img_1"  href="#">Delete</a> \
                       <a class="set_default" href="#">Set_Default</a> \
                       <a class="set_public" href="#">Set_Puclic</a> \
                     </div> \
@@ -164,6 +161,7 @@
       pp_titles = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return ($(n).find('img').attr('alt')) ? $(n).find('img').attr('alt') : ""; }) : $.makeArray($(this).find('img').attr('alt'));
       //pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
       pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('p').text()) ? $(n).find('p').text() : ""; }) : $.makeArray($(this).find('p').text());
+       
       if(pp_images.length > settings.overlay_gallery_max) settings.overlay_gallery = false;
       
       set_position = jQuery.inArray($(this).attr('href'), pp_images); // Define where in the array the clicked item is positionned
