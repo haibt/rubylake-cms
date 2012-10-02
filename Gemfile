@@ -5,7 +5,12 @@ gem 'rails', '3.2.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3' 
+group :development, :test do
+  gem 'sqlite3'
+end
+group :production do
+  gem 'pg'
+end
 #gem 'mysql2'
 gem "devise"
 gem 'fastercsv' # Only required on Ruby 1.8 and below
@@ -17,7 +22,7 @@ gem "paperclip", "~> 3.0"
 gem "ckeditor", "3.7.1"
 gem "carrierwave"
 gem "mini_magick"
-
+gem "heroku"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -32,6 +37,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
+group :production do
+  gem 'thin'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
