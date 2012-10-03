@@ -4,8 +4,14 @@ gem 'rails', '3.2.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3' 
+group :development, :test do
+  gem 'sqlite3'
+end
+group :production do
+  gem 'pg'
+end
+gem 'thin'
+gem 'therubyracer'
 gem "devise"
 gem 'fastercsv' # Only required on Ruby 1.8 and below
 gem 'rails_admin'
