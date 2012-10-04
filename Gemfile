@@ -10,8 +10,16 @@ end
 group :production do
   gem 'pg'
 end
-gem 'thin'
-gem 'therubyracer'
+group :production do
+  gem 'thin'
+end
+group :production do
+  gem 'therubyracer'
+end
+group :development do
+  gem 'taps'
+  gem 'rvm'
+end
 gem "devise"
 gem 'fastercsv' # Only required on Ruby 1.8 and below
 gem 'rails_admin'
