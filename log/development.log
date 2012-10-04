@@ -366,3 +366,150 @@ Served asset /fontawesome-webfont.eot - 200 OK (19ms)
 
 Started GET "/assets/fontawesome-webfont.woff" for 127.0.0.1 at 2012-10-03 15:32:31 +0700
 Served asset /fontawesome-webfont.woff - 200 OK (14ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2012-10-04 11:50:20 +0700
+Processing by HomeController#profile as HTML
+  [1m[36mMenu Load (0.1ms)[0m  [1mSELECT "menus".* FROM "menus" WHERE "menus"."location" = 'main'[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" 
+Creating scope :public. Overwriting existing method Article.public.
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE (is_blog = 't')[0m
+  [1m[35mArticle Load (12.9ms)[0m  SELECT "articles".* FROM "articles" WHERE (deleted_by is NULL) AND (is_public = 't') AND (is_featured = 't') ORDER BY updated_at DESC LIMIT 2
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles" WHERE (deleted_by is NULL) AND (is_public = 't') ORDER BY updated_at DESC LIMIT 8[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles" WHERE "articles"."category_id" IN (NULL) AND (deleted_by is NULL) AND (is_public = 't') LIMIT 5
+  Rendered home/_index.html.erb (17.6ms)
+  Rendered home/profile.html.erb within layouts/application (68.8ms)
+Completed 200 OK in 874ms (Views: 569.2ms | ActiveRecord: 38.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /application.css - 200 OK (8ms)
+
+
+Started GET "/assets/articles.css?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /articles.css - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /bootstrap_and_overrides.css - 200 OK (1ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /categories.css - 200 OK (1ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /comments.css - 200 OK (1ms)
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /home.css - 200 OK (1ms)
+
+
+Started GET "/assets/versions.css?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /versions.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /jquery.js - 200 OK (92ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-modal.js - 200 OK (7ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /jquery_ujs.js - 200 OK (3ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-dropdown.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-transition.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-alert.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-scrollspy.js - 200 OK (5ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-tab.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-button.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-collapse.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-tooltip.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-popover.js - 200 OK (3ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-carousel.js - 200 OK (80ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-typeahead.js - 200 OK (3ms)
+
+
+Started GET "/assets/articles.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /articles.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /bootstrap.js - 200 OK (1ms)
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap.js - 200 OK (15ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /twitter/bootstrap/bootstrap-affix.js - 200 OK (3ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /categories.js - 200 OK (1ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /comments.js - 200 OK (1ms)
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /home.js - 200 OK (3ms)
+
+
+Started GET "/assets/versions.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /versions.js - 200 OK (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-10-04 11:50:21 +0700
+Served asset /application.js - 200 OK (26ms)
+
+
+Started GET "/assets/nav_bg.gif" for 127.0.0.1 at 2012-10-04 11:50:22 +0700
+Served asset /nav_bg.gif - 200 OK (39ms)
+
+
+Started GET "/assets/fontawesome-webfont.eot" for 127.0.0.1 at 2012-10-04 11:50:22 +0700
+Served asset /fontawesome-webfont.eot - 200 OK (30ms)
+
+
+Started GET "/assets/fontawesome-webfont.woff" for 127.0.0.1 at 2012-10-04 11:50:22 +0700
+Served asset /fontawesome-webfont.woff - 200 OK (10ms)
