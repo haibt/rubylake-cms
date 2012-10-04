@@ -1,0 +1,368 @@
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (112.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (100.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateArticles (1)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "articles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "permalink" varchar(255), "description" varchar(255), "content" varchar(255), "user_id" integer, "status" varchar(8), "category_id" integer, "location" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('1')
+  [1m[36m (120.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCategories (2)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "permalink" varchar(255), "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('2')
+  [1m[36m (154.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateMenus (3)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "menus" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "permalink" varchar(255), "parent_id" integer, "location" varchar(8), "extra_link" varchar(255), "category_id" integer, "article_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('3')
+  [1m[36m (139.0ms)[0m  [1mcommit transaction[0m
+Migrating to DeviseCreateUsers (20120812155945)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120812155945')[0m
+  [1m[35m (154.2ms)[0m  commit transaction
+Migrating to CreateRailsAdminHistoriesTable (20120813071123)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "rails_admin_histories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "message" text, "username" varchar(255), "item" integer, "table" varchar(255), "month" integer(2), "year" integer(5), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("rails_admin_histories")[0m
+  [1m[35m (0.2ms)[0m  CREATE INDEX "index_rails_admin_histories" ON "rails_admin_histories" ("item", "table", "month", "year")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120813071123')[0m
+  [1m[35m (130.2ms)[0m  commit transaction
+Migrating to AddIsAdminIntoUsers (20120813092222)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "users" ADD "is_admin" boolean DEFAULT 'f'
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120813092222')[0m
+  [1m[35m (106.7ms)[0m  commit transaction
+Migrating to AddImgArticle (20120821024010)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "articles" ADD "img" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120821024010')[0m
+  [1m[35m (114.3ms)[0m  commit transaction
+Migrating to AddColumnsToUsers (20120822073223)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "provider" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "uid" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120822073223')
+  [1m[36m (114.4ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveColumnsToUsers (20120822112007)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "is_admin" boolean DEFAULT 'f', "provider" varchar(255), "uid" varchar(255)) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_reset_password_token')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_users_on_email')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_users")[0m
+  [1m[35m (12.4ms)[0m  CREATE UNIQUE INDEX "temp_index_altered_users_on_reset_password_token" ON "altered_users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("altered_users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('temp_index_altered_users_on_reset_password_token')
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "temp_index_altered_users_on_email" ON "altered_users" ("email")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "is_admin" boolean DEFAULT 'f', "uid" varchar(255)) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('temp_index_altered_users_on_email')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_users_on_reset_password_token')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "altered_users"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "altered_users"
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "is_admin" boolean DEFAULT 'f', "uid" varchar(255)) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_info('index_users_on_reset_password_token')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_users_on_email')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_users")[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "temp_index_altered_users_on_reset_password_token" ON "altered_users" ("reset_password_token")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('temp_index_altered_users_on_reset_password_token')
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "temp_index_altered_users_on_email" ON "altered_users" ("email")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "is_admin" boolean DEFAULT 'f') 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_users")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('temp_index_altered_users_on_email')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_users_on_reset_password_token')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_users"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "altered_users"
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120822112007')[0m
+  [1m[35m (142.7ms)[0m  commit transaction
+Migrating to AddcolumnCategory (20120823082825)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120823082825')
+  [1m[36m (131.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddDeleteBy (20120824033908)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "articles" ADD "deleted_by" integer DEFAULT NULL[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120824033908')
+  [1m[36m (139.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddCategoryBlog (20120827030230)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "categories" ADD "is_blog" boolean DEFAULT 'f'[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120827030230')
+  [1m[36m (139.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateComments (20120827031031)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "comment" text, "commentable_id" integer, "commentable_type" varchar(255), "user_id" integer, "article_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120827031031')
+  [1m[36m (139.4ms)[0m  [1mcommit transaction[0m
+Migrating to AddModerateFieldsToUsers (20120827085110)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "users" ADD "is_moderate" boolean[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120827085110')
+  [1m[36m (105.3ms)[0m  [1mcommit transaction[0m
+Migrating to AddColumnPublicArticle (20120827103508)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "articles" ADD "is_public" boolean DEFAULT 'f'[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120827103508')
+  [1m[36m (105.3ms)[0m  [1mcommit transaction[0m
+Migrating to AddAttachmentPhotoToArticles (20120828032304)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: Method `t.has_attached_file` in the migration has been deprecated and will be replaced by `t.attachment`. (called from block in up at /home/viethung/RubymineProjects/gitProject/rubylake-cms/db/migrate/20120828032304_add_attachment_photo_to_articles.rb:4)
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "articles" ADD "photo_file_name" varchar(255)[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "articles" ADD "photo_content_type" varchar(255)
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "articles" ADD "photo_file_size" integer[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "articles" ADD "photo_updated_at" datetime
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120828032304')[0m
+  [1m[35m (111.7ms)[0m  commit transaction
+Migrating to CreateCategoryModerators (20120829065932)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "category_moderators" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category_id" integer, "moderator_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120829065932')[0m
+  [1m[35m (137.9ms)[0m  commit transaction
+Migrating to AddParentCategory (20120829110716)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "categories" ADD "parent_id" integer
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120829110716')[0m
+  [1m[35m (130.6ms)[0m  commit transaction
+Migrating to AddColumnFeaturedArticle (20120830061717)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "articles" ADD "is_featured" boolean DEFAULT 'f'
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120830061717')[0m
+  [1m[35m (139.1ms)[0m  commit transaction
+Migrating to CreateVersions (20120830091843)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "versions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "article_type" varchar(255), "article_id" integer, "event" varchar(255), "whodunnit" varchar(255), "object" text, "created_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("versions")[0m
+  [1m[35m (0.3ms)[0m  CREATE INDEX "index_versions_on_article_type_and_article_id" ON "versions" ("article_type", "article_id")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120830091843')[0m
+  [1m[35m (153.6ms)[0m  commit transaction
+  [1m[36m (0.5ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("articles")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("categories")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("category_moderators")[0m
+  [1m[35m (0.1ms)[0m  PRAGMA index_list("comments")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("menus")[0m
+  [1m[35m (0.1ms)[0m  PRAGMA index_list("rails_admin_histories")
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_info('index_rails_admin_histories')[0m
+  [1m[35m (0.1ms)[0m  PRAGMA index_list("users")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_reset_password_token')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_users_on_email')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("versions")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_versions_on_article_type_and_article_id')
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2012-10-03 15:32:25 +0700
+Processing by HomeController#profile as HTML
+  [1m[36mMenu Load (0.1ms)[0m  [1mSELECT "menus".* FROM "menus" WHERE "menus"."location" = 'main'[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" 
+Creating scope :public. Overwriting existing method Article.public.
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE (is_blog = 't')[0m
+  [1m[35mArticle Load (0.3ms)[0m  SELECT "articles".* FROM "articles" WHERE (deleted_by is NULL) AND (is_public = 't') AND (is_featured = 't') ORDER BY updated_at DESC LIMIT 2
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles" WHERE (deleted_by is NULL) AND (is_public = 't') ORDER BY updated_at DESC LIMIT 8[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles" WHERE "articles"."category_id" IN (NULL) AND (deleted_by is NULL) AND (is_public = 't') LIMIT 5
+  Rendered home/_index.html.erb (4.7ms)
+  Rendered home/profile.html.erb within layouts/application (23.1ms)
+Compiled articles.css  (78ms)  (pid 13720)
+Compiled bootstrap_and_overrides.css  (1099ms)  (pid 13720)
+Compiled categories.css  (7ms)  (pid 13720)
+Compiled comments.css  (1ms)  (pid 13720)
+Compiled home.css  (16ms)  (pid 13720)
+Compiled versions.css  (1ms)  (pid 13720)
+Compiled application.css  (1424ms)  (pid 13720)
+Compiled jquery.js  (58ms)  (pid 13720)
+Compiled jquery_ujs.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-transition.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-alert.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-modal.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-dropdown.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-scrollspy.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-tab.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-tooltip.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-popover.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-button.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-collapse.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-carousel.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-typeahead.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap/bootstrap-affix.js  (0ms)  (pid 13720)
+Compiled twitter/bootstrap.js  (203ms)  (pid 13720)
+Compiled articles.js  (75ms)  (pid 13720)
+Compiled bootstrap.js  (3ms)  (pid 13720)
+Compiled categories.js  (0ms)  (pid 13720)
+Compiled comments.js  (0ms)  (pid 13720)
+Compiled home.js  (0ms)  (pid 13720)
+Compiled versions.js  (0ms)  (pid 13720)
+Compiled application.js  (553ms)  (pid 13720)
+Completed 200 OK in 2596ms (Views: 2355.5ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-10-03 15:32:28 +0700
+Processing by HomeController#profile as HTML
+  [1m[36mMenu Load (0.2ms)[0m  [1mSELECT "menus".* FROM "menus" WHERE "menus"."location" = 'main'[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" 
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT "categories".* FROM "categories" WHERE (is_blog = 't')[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles" WHERE (deleted_by is NULL) AND (is_public = 't') AND (is_featured = 't') ORDER BY updated_at DESC LIMIT 2
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles" WHERE (deleted_by is NULL) AND (is_public = 't') ORDER BY updated_at DESC LIMIT 8[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles" WHERE "articles"."category_id" IN (NULL) AND (deleted_by is NULL) AND (is_public = 't') LIMIT 5
+  Rendered home/_index.html.erb (1.5ms)
+  Rendered home/profile.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 22ms (Views: 17.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-10-03 15:32:28 +0700
+Served asset /application.css - 200 OK (7ms)
+
+
+Started GET "/assets/articles.css?body=1" for 127.0.0.1 at 2012-10-03 15:32:28 +0700
+Served asset /articles.css - 200 OK (55ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /categories.css - 200 OK (5ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /bootstrap_and_overrides.css - 200 OK (3ms)
+
+
+Started GET "/assets/versions.css?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /versions.css - 200 OK (3ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /comments.css - 200 OK (2ms)
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /home.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /jquery.js - 200 OK (8ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /jquery_ujs.js - 200 OK (10ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-transition.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-modal.js - 200 OK (5ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-alert.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-dropdown.js - 200 OK (5ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-scrollspy.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-tab.js - 200 OK (3ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-popover.js - 200 OK (3ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-tooltip.js - 200 OK (73ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-typeahead.js - 200 OK (4ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-button.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-collapse.js - 200 OK (3ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-carousel.js - 200 OK (4ms)
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap/bootstrap-affix.js - 200 OK (2ms)
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /twitter/bootstrap.js - 200 OK (20ms)
+
+
+Started GET "/assets/articles.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /articles.js - 200 OK (1ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /categories.js - 200 OK (1ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /bootstrap.js - 200 OK (2ms)
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /comments.js - 200 OK (2ms)
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /home.js - 200 OK (1ms)
+
+
+Started GET "/assets/versions.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /versions.js - 200 OK (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-10-03 15:32:29 +0700
+Served asset /application.js - 200 OK (26ms)
+
+
+Started GET "/assets/nav_bg.gif" for 127.0.0.1 at 2012-10-03 15:32:31 +0700
+Served asset /nav_bg.gif - 200 OK (133ms)
+
+
+Started GET "/assets/fontawesome-webfont.eot" for 127.0.0.1 at 2012-10-03 15:32:31 +0700
+Served asset /fontawesome-webfont.eot - 200 OK (19ms)
+
+
+Started GET "/assets/fontawesome-webfont.woff" for 127.0.0.1 at 2012-10-03 15:32:31 +0700
+Served asset /fontawesome-webfont.woff - 200 OK (14ms)
