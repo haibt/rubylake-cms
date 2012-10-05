@@ -1,29 +1,35 @@
-<div class="container" style="display:block;background: <%= @theme.color_background_article %>;padding:10px"> 
-	<p class="title" ><%= @article.title %></p>
-  <p class="time"><%= @article.created_at%></p>
-  <br/>
-  <p class="description">
-    <%= @article.description %>
-  </p>
-  <br/>
-  <p class="content">
-    <%= raw @article.content %>
-  </p>
- <div id="img-df"> <%= image_tag @article.default_image.photo.url(:thumb) %></div>
-  <br/>
-  <%= render :partial => "upload_images", :locals => { :images => @article.images} %>
-  <%= render :partial => "show_gallery" %>
-  <% if @article.updatable_by?(current_user) %>
-  <div align="right">
-    <%= link_to 'Edit', { :action => 'edit', :permalink => @article.permalink }, :class => "btn btn-primary" %>
-    <%= link_to 'Move', { :action => 'move', :permalink => @article.permalink }, :class => "btn btn-primary" %>
-    <%= link_to 'Delete', { :action => 'delete',:permalink => @article.permalink }, :class => "btn btn-primary", :confirm => 'Are you sure?' %>
-  </div>
-  <% else %>
-  <div align="right">
-    <%= link_to 'Create New', {:action=>'new'}, :class => "btn btn-primary" %>
-  </div>
-  <% end %>
+<div class="container" style="display:block;background: <%= @theme.color_background_article %>;padding:10px">
+	<p class="title" >
+		<%= @article.title %>
+	</p>
+	<p class="time">
+		<%= @article.created_at%>
+	</p>
+	<br/>
+	<p class="description">
+		<%= @article.description %>
+	</p>
+	<br/>
+	<p class="content">
+		<%= raw @article.content %>
+	</p>
+	<div id="img-df">
+		<%= image_tag @article.default_image.photo.url(:thumb) %>
+	</div>
+	<br/>
+	<%= render :partial => "upload_images", :locals => { :images => @article.images} %>
+	<%= render :partial => "show_gallery" %>
+	<% if @article.updatable_by?(current_user) %>
+	<div align="right">
+		<%= link_to 'Edit', { :action => 'edit', :permalink => @article.permalink }, :class => "btn btn-primary" %>
+		<%= link_to 'Move', { :action => 'move', :permalink => @article.permalink }, :class => "btn btn-primary" %>
+		<%= link_to 'Delete', { :action => 'delete',:permalink => @article.permalink }, :class => "btn btn-primary", :confirm => 'Are you sure?' %>
+	</div>
+	<% else %>
+	<div align="right">
+		<%= link_to 'Create New', {:action=>'new'}, :class => "btn btn-primary" %>
+	</div>
+	<% end %>
 	<div class="container" style="margin-bottom: 30px;">
 		<h3>More news...</h3>
 		<ul>
@@ -34,96 +40,126 @@
 			<% end %>
 		</ul>
 	</div>
-<div class="container" style="display:block;">
-  <% if @article.category && @article.category.is_blog? %>
-  <%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
-  <% else %>
-  <%= render :partial => "public_comments" %>
-  <% end %>
-</div>
-<script type="text/javascript">
-$(document).ready(function() {
-		$("a.del_article").live("click", function() {
-				var article_id = <%= @article.id %>;
-				var del_url = "/articles/" + article_id + "/delete";
-				var confirmBox;
-				confirmBox = confirm("Are you sure to delete the article ?");
-				if (confirmBox == true) {
-					$.ajax({
-						url : del_url,
-						type : "POST",
-						dataType : "json",
-						success : function(response) {
-							if (response.result) {
-								$(".del-article").show().alert('close');
-							} else {
-								$(".del-article-error").show().alert('close');
-							}
-						}
-					});
+	<div class="container" style="display:block;">
+		<% if @article.category && @article.category.is_blog? %>
+		<%= render :partial => "comments", :locals => { :comments => @article.comments } if current_user %>
+		<% else %>
+		<%= render :partial => "public_comments" %>
+		<% end %>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+$("a.del_article").live("click", function() {
+var article_id = <%= @article.id %>
+	;
+	var del_url = "/articles/" + article_id + "/delete";
+	var confirmBox;
+	confirmBox = confirm("Are you sure to delete the article ?");
+	if (confirmBox == true) {
+		$.ajax({
+			url : del_url,
+			type : "POST",
+			dataType : "json",
+			success : function(response) {
+				if (response.result) {
+					$(".del-article").show().alert('close');
+				} else {
+					$(".del-article-error").show().alert('close');
 				}
+			}
+		});
+	}
 
+	});
+
+	$("a.del_image").live("click", function() {
+		var image_id = $(this).attr("rubylake:image_id");
+		var del_url = "/images/" + image_id + "/delete";
+		var confirmBox;
+		confirmBox = confirm("Are you sure to delete the image ?");
+		if (confirmBox == true) {
+			$.ajax({
+				url : del_url,
+				type : "POST",
+				dataType : "json",
+				success : function(response) {
+					if (response.result) {
+						$("#img_" + image_id).hide();
+						var new_success = $("#success_message_temp").clone();
+						$(new_success).find("strong").html(response.message);
+						$("#main_messages").append(new_success);
+						$(new_success).show();
+					} else {
+						var new_error = $("#error_message_temp").clone();
+						$(new_error).find("strong").html(response.message);
+						$("#main_messages").append(new_error);
+						$(new_error).show();
+					}
+				}
 			});
+		}
+	});
 
-	$("a.del_img").live("click", function() {
-        var image_id = $(this).attr("rubylake:image_id");
-        alert('step2: '+ image_id);
-        var del_url = "/images/" + image_id + "/delete";
-        var confirmBox;
-        confirmBox = confirm("Are you sure to delete the image ?");
-        if (confirmBox == true) {
-          $.ajax({
-            url : del_url,
-            type : "POST",
-            dataType : "json",
-            success : function(response) {
-              if (response.result) {
-                $("#img_" + image_id).hide();
-                var new_success = $("#success_message_temp").clone();
-                $(new_success).find("strong").html(response.message);
-                $("#main_messages").append(new_success);
-                $(new_success).show();
-              } else {
-                var new_error = $("#error_message_temp").clone();
-                $(new_error).find("strong").html(response.message);
-                $("#main_messages").append(new_error);
-                $(new_error).show();
-              }
-            }
-          });
-        }
-      });
+	$("a.pp_del_img").live("click", function() {
+		var image_id = $(this).parent().find("p.pp_idimg").text();
+		var del_url = "/images/" + image_id + "/delete";
+		var confirmBox;
+		confirmBox = confirm("Are you sure to delete the image ?");
+		if (confirmBox == true) {
+		   $.ajax({
+				url : del_url,
+				type : "POST",
+				dataType : "json",
+				success : function(response) {
+					if (response.result) {
+						$("#img_"+image_id).hide();
+						var new_success = $("#success_message_temp").clone();
+						$(new_success).find("strong").html(response.message);
+						$("#main_messages").append(new_success);
+						location.reload();
+						$(new_success).show();
+						
+					} else {
+						var new_error = $("#error_message_temp").clone();
+						$(new_error).find("strong").html(response.message);
+						$("#main_messages").append(new_error);
+						$(new_error).show();
+						
+					}
+				}
+			});
+		}
+		 
+	});
 
-      $("a.set_default").live("click", function() {
-        alert('step1');
-        var image_id = $(this).attr("rubylake:image_id");
-        var set_default_url = "/images/" + image_id + "/set_default";
-        var confirmBox;
-        alert(image_id)
-        confirmBox = confirm("Are you sure to set the image to default ?");
-        if (confirmBox == true) {
-          $.ajax({
-            url : set_default_url,
-            type : "POST",
-            dataType : "json",
-            success : function(response) {
-              if (response.result) {
-                var new_success = $("#success_message_temp").clone();
-                $(new_success).find("strong").html(response.message);
-                $("#main_messages").append(new_success);
-                $(new_success).show();
-              } else {
-                var new_error = $("#error_message_temp").clone();
-                $(new_error).find("strong").html(response.message);
-                $("#main_messages").append(new_error);
-                $(new_error).show();
-              }
-            }
-          });
-        }
-      });
-    });
-</script>	
-
-
+	$("a.pp_set_default").live("click", function() {
+		//var image_id = $(this).attr("rubylake:image_id");
+		var image_id = $(this).parent().find("p.pp_idimg").text();
+		var set_default_url = "/images/" + image_id + "/set_default";
+		var confirmBox;
+		alert(image_id)
+		confirmBox = confirm("Are you sure to set the image to default ?");
+		if (confirmBox == true) {
+			$.ajax({
+				url : set_default_url,
+				type : "POST",
+				dataType : "json",
+				success : function(response) {
+					if (response.result) {
+						var new_success = $("#success_message_temp").clone();
+						$(new_success).find("strong").html(response.message);
+						$("#main_messages").append(new_success);
+						$(new_success).show();
+					} else {
+						var new_error = $("#error_message_temp").clone();
+						$(new_error).find("strong").html(response.message);
+						$("#main_messages").append(new_error);
+						$(new_error).show();
+					}
+				}
+			});
+		}
+	});
+	});
+	</script>
 
