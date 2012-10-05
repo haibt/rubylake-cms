@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921022221) do
+ActiveRecord::Schema.define(:version => 20120926040218) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -107,17 +107,31 @@ ActiveRecord::Schema.define(:version => 20120921022221) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
+  create_table "settings", :force => true do |t|
+    t.string   "about_us"
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+    t.string   "website",           :default => "www.ithanoi.com"
+    t.string   "email",             :default => "scrum2B@ithanoi.com"
+    t.string   "web_name",          :default => "Scrum2B team"
+    t.string   "title",             :default => "Scrum2B: be scrum with us"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
+
   create_table "themes", :force => true do |t|
-    t.string   "color_background_body"
-    t.string   "color_background_menu"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.string   "color_background_article"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "img_bg_file_name"
     t.string   "img_bg_content_type"
     t.integer  "img_bg_file_size"
     t.datetime "img_bg_updated_at"
-    t.boolean  "is_active",                :default => false
+    t.string   "color_background_menu",    :default => "#e4e4e4"
+    t.string   "color_background_body",    :default => "#e4e4e4"
+    t.string   "color_background_article", :default => "#e4e4e4"
+    t.boolean  "is_active",                :default => true
   end
 
   create_table "users", :force => true do |t|
