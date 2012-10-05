@@ -2,9 +2,9 @@
   <ul class="gallery container clearfix">
     <% @article.images.each do |image| %>
   <li id="img_<%= image.id %>" class="img" >
-    <a rubylake:image_id="<%= image.id %>" href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]" p="<%=image.id%>"><p class="id_img" style="display: none"><%=image.is_main%></p><img src="<%= image.photo.url(:thumb) %>"/></a>
+    <a class="idimg"  rubylake:image_id="<%= image.id %>" href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]"><p class="idimg" style="display: none"><%=image.id%></p><p class="description" style="display: none"><%= image.description %></p><p class="title" style="display: none"><%= image.title %></p><img src="<%= image.photo.url(:thumb) %>"/></a>
     <a class="del_image" rubylake:image_id="<%= image.id %>"href ="#" >x</a>
-    <a class= "set_default" rubylake:image_id="<%= image.id %>"href ="#">setdefault</a>
+
   </li>
   <% end %>
 </ul>

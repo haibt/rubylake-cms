@@ -8,10 +8,11 @@
   $.prettyPhoto = {version: '3.1.4'};
   
   $.fn.prettyPhoto = function(pp_settings) { 
-     var a = $(this).parent().parent().find('p.description').text();
-        //  var image_id = $(this).attr("p");
+
+  	var image_id = "";
     pp_settings = jQuery.extend({
-      a: a,
+      image_id:image_id,
+
       hook: 'rel', /* the attribute tag to use for prettyPhoto hooks. default: 'rel'. For HTML5, use "data-rel" or similar. */
       animation_speed: 'fast', /* fast/slow/normal */
       ajaxcallback: function() {},
@@ -58,17 +59,17 @@
                     <div id="pp_full_res"></div> \
                     <div class="pp_details"> \
                       <div class="pp_nav"> \
-                        <a href="#" class="pp_arrow_previous">Previous</a> \
+                      	<a href="#" class="pp_arrow_previous">Previous</a> \
                         <p class="currentTextHolder">0/0</p> \
                         <a href="#" class="pp_arrow_next">Next</a> \
-                      </div> \
+                      </div><br /><br />  \
                       <p class="pp_description"></p> \
-                      <p class="pp_id"></p> \
+                      <p class="pp_idimg"></p><br /> \
                       <div class="pp_social">{pp_social}</div> \
                       <a class="pp_close" href="#">Close</a> \
-                      <a class="del_img_1"  href="#">Delete</a> \
-                      <a class="set_default" href="#">Set_Default</a> \
-                      <a class="set_public" href="#">Set_Puclic</a> \
+                      <a class="pp_del_img" href="#">Delete</a> \
+			          <a class="pp_set_default" href="#">Set_Default</a> \
+			          <a class="pp_set_public" href="#">Set_Puclic</a> \
                     </div> \
                   </div> \
                 </div> \
@@ -159,10 +160,13 @@
       // Put the SRCs, TITLEs, ALTs into an array.
       pp_images = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return $(n).attr('href'); }) : $.makeArray($(this).attr('href'));
       pp_titles = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return ($(n).find('img').attr('alt')) ? $(n).find('img').attr('alt') : ""; }) : $.makeArray($(this).find('img').attr('alt'));
-      //pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
-      pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('p').text()) ? $(n).find('p').text() : ""; }) : $.makeArray($(this).find('p').text());
-       
-      if(pp_images.length > settings.overlay_gallery_max) settings.overlay_gallery = false;
+
+      pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
+      pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('p.description').text()) ? $(n).find('p.description').text() : ""; }) : $.makeArray($(this).find('p.description').text());
+      pp_idimg = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('p.idimg').text()) ? $(n).find('p.idimg').text() : ""; }) : $.makeArray($(this).find('p.idimg').text());
+      pp_titles = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('p.title').text()) ? $(n).find('p.title').text() : ""; }) : $.makeArray($(this).find('p.title').text());
+     
+	  if(pp_images.length > settings.overlay_gallery_max) settings.overlay_gallery = false;
       
       set_position = jQuery.inArray($(this).attr('href'), pp_images); // Define where in the array the clicked item is positionned
       rel_index = (isSet) ? set_position : $("a["+settings.hook+"^='"+theRel+"']").index($(this));
@@ -190,6 +194,7 @@
         pp_images = $.makeArray(arguments[0]);
         pp_titles = (arguments[1]) ? $.makeArray(arguments[1]) : $.makeArray("");
         pp_descriptions = (arguments[2]) ? $.makeArray(arguments[2]) : $.makeArray("");
+        pp_idimg = (arguments[3]) ? $.makeArray(arguments[3]) : $.makeArray("");
         isSet = (pp_images.length > 1) ? true : false;
         set_position = (arguments[3])? arguments[3]: 0;
         _build_overlay(event.target); // Build the overlay {this} being the caller
@@ -225,7 +230,7 @@
       }else{
         $pp_pic_holder.find('.pp_description').hide();
       }
-      
+      $pp_pic_holder.find('.pp_idimg').show().html(unescape(pp_idimg[set_position]));
       // Get the dimensions
       movie_width = ( parseFloat(getParam('width',pp_images[set_position])) ) ? getParam('width',pp_images[set_position]) : settings.default_width.toString();
       movie_height = ( parseFloat(getParam('height',pp_images[set_position])) ) ? getParam('height',pp_images[set_position]) : settings.default_height.toString();

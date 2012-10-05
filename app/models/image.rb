@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
   # attr_accessible :title, :body
    belongs_to :article
-  attr_accessible :article_id, :is_main, :is_public,:photo
+  attr_accessible :article_id, :is_main, :is_public,:photo, :title, :description
 
   has_attached_file :photo, 
                     :styles => {
