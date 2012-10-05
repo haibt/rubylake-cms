@@ -100,6 +100,7 @@ var article_id = <%= @article.id %>
 		}
 	});
 
+
 	$("a.pp_del_img").live("click", function() {
 		var image_id = $(this).parent().find("p.pp_idimg").text();
 		var del_url = "/images/" + image_id + "/delete";

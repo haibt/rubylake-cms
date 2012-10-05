@@ -8,9 +8,11 @@
   $.prettyPhoto = {version: '3.1.4'};
   
   $.fn.prettyPhoto = function(pp_settings) { 
+
   	var image_id = "";
     pp_settings = jQuery.extend({
       image_id:image_id,
+
       hook: 'rel', /* the attribute tag to use for prettyPhoto hooks. default: 'rel'. For HTML5, use "data-rel" or similar. */
       animation_speed: 'fast', /* fast/slow/normal */
       ajaxcallback: function() {},
@@ -158,6 +160,7 @@
       // Put the SRCs, TITLEs, ALTs into an array.
       pp_images = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return $(n).attr('href'); }) : $.makeArray($(this).attr('href'));
       pp_titles = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return ($(n).find('img').attr('alt')) ? $(n).find('img').attr('alt') : ""; }) : $.makeArray($(this).find('img').attr('alt'));
+
       pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr(settings.hook).indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
       pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('p.description').text()) ? $(n).find('p.description').text() : ""; }) : $.makeArray($(this).find('p.description').text());
       pp_idimg = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('p.idimg').text()) ? $(n).find('p.idimg').text() : ""; }) : $.makeArray($(this).find('p.idimg').text());
