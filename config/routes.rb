@@ -69,6 +69,7 @@ RubyLakeCms::Application.routes.draw do
   # Sample of regular route:
 
   match '/images/:id/set_default'=> 'images#set_default'
+  match '/images/:id/set_public'=> 'images#set_public'
   resources :home
     # Sample of regular route:
 

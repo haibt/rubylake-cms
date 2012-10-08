@@ -9,14 +9,8 @@ class Image < ActiveRecord::Base
                     :medium => "400x400>"}, 
                     :default_url => '/images/member_default_thumb.jpg'
   scope :main, :conditions => ["is_main = ?", true]  
-  scope :public_img, :conditions => ["is_public = ?", true]
+  scope :public_img, :conditions => ["is_public = ?", false]
   def self.save(image) 
-  
   end
-
-  # def upload_by? (check_user)
-    # return false unless check_user
-    # return true if check_user.admin? || check_user == self.author 
-    # return image && image.updatable_by?(check_user)
-  # end
+ 
 end

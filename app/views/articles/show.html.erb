@@ -134,11 +134,9 @@ var article_id = <%= @article.id %>
 	});
 
 	$("a.pp_set_default").live("click", function() {
-		//var image_id = $(this).attr("rubylake:image_id");
 		var image_id = $(this).parent().find("p.pp_idimg").text();
 		var set_default_url = "/images/" + image_id + "/set_default";
 		var confirmBox;
-		alert(image_id)
 		confirmBox = confirm("Are you sure to set the image to default ?");
 		if (confirmBox == true) {
 			$.ajax({
@@ -161,6 +159,35 @@ var article_id = <%= @article.id %>
 			});
 		}
 	});
+	
+	$("a.pp_set_public").live("click", function() {
+		var image_id = $(this).parent().find("p.pp_idimg").text();
+		var set_private_url = "/images/" + image_id + "/set_public";
+		var confirmBox;
+		confirmBox = confirm("Are you sure to set the image to Private ?");
+		if (confirmBox == true) {
+			$.ajax({
+				url : set_private_url,
+				type : "POST",
+				dataType : "json",
+				success : function(response) {
+					if (response.result) {
+						$("#img_"+image_id).hide();
+						var new_success = $("#success_message_temp").clone();
+						$(new_success).find("strong").html(response.message);
+						$("#main_messages").append(new_success);
+						$(new_success).show();
+					} else {
+						var new_error = $("#error_message_temp").clone();
+						$(new_error).find("strong").html(response.message);
+						$("#main_messages").append(new_error);
+						$(new_error).show();
+					}
+				}
+			});
+		}
+	});
+	
 	});
 	</script>
 

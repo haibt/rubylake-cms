@@ -12,8 +12,8 @@ class Article < ActiveRecord::Base
 
   def default_image
     return @default_image if @default_image
-    @default_image = images.where(:is_main => true).first
-    @default_image = images.first unless @default_image
+    @default_image = images.public_img.where(:is_main => true).first
+    @default_image = images.public_img.first unless @default_image
     @default_image = images.new unless @default_image
     return @default_image 
   end

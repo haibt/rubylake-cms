@@ -69,7 +69,7 @@
                       <a class="pp_close" href="#">Close</a> \
                       <a class="pp_del_img" href="#">Delete</a> \
 			          <a class="pp_set_default" href="#">Set_Default</a> \
-			          <a class="pp_set_public" href="#">Set_Puclic</a> \
+			          <a class="pp_set_public" href="#">Set_Private</a> \
                     </div> \
                   </div> \
                 </div> \
