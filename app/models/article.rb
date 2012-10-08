@@ -1,7 +1,7 @@
 class Article < ActiveRecord::Base
   #set_table_name "cms_articles"
 
-  has_paper_trail
+  #has_paper_trail
   belongs_to :category
   belongs_to :author, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :user
