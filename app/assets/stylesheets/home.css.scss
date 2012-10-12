@@ -53,7 +53,7 @@ p.description {
 }
 
 p.title {
-  font-size:18px;
+  font-size:15px;
  
 }
 
@@ -64,11 +64,20 @@ p.redmore {
   left:10px;
 }
 p.by{
-  position:absolute;
-  top:35px;
-  left:10px;
   font-size:15px;
   
+}
+#img-df{
+  padding:10px;
+  height:165px;
+  width:90%;
+  margin:0 auto;
+}
+#img-df img{
+  margin:-10px 5px 5px -10px;
+  height:100px;
+  width:100px;
+  float:left;
 }
 .article-new {
   padding: 10px;

@@ -42,6 +42,7 @@
   <% if @article.new_record? %>
   	<%= link_to 'Back', "/category", :class => 'btn' %>
   <% else %>
+  <br />
   	<%= link_to 'Back', "/article/#{@article.permalink}", :class => 'btn' %>
   <% end %>
 

@@ -24,12 +24,13 @@ class Category < ActiveRecord::Base
   end
 
   def updatable_by?(check_user)
-    return true if self.moderators.include?(check_user)
-    return parent && parent.updatable_by?(check_user)
+  return true if self.moderators.include?(check_user)
+  return parent && parent.updatable_by?(check_user)
   end
   
   def moderators
     category_moderators.map{|category_moderator| category_moderator.user}
   end
+  
 
 end

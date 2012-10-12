@@ -25,10 +25,8 @@ ul, li {
   height: 37px;
 }
 
-.footer {
-  margin-top: 45px;
-  padding: 35px 0 36px;
-  border-top: 1px solid #E5E5E5;
+#footer {
+
 }
 
 .version {
@@ -38,3 +36,32 @@ ul, li {
   padding: 20px;
   width: 400px;
 }
+#footer .container .lowerbar-wrapper:first-child {
+  margin-left: 0;
+}
+#lower-wrapper {
+  background: #333333;
+  margin: auto;
+  padding: 20px 0px 20px 0px;
+  width: 960px;
+  border: 0;
+}
+.lowerbar-wrapper {
+  padding: 20px 0px;
+  text-align: justify;
+  color: #ddd;
+  font: bold 12px Arial, Tahoma, Verdana;
+  word-wrap: break-word;
+  overflow: hidden;
+  min-height: 100px;
+  box-shadow: 0px 0px 1px 0px #888888;
+}
+.footer 
+{
+    position: relative;
+ 
+  height: 150px;
+  clear:both;
+    padding-top:20px;
+    color:#fff;
+} 

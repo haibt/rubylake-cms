@@ -1,7 +1,7 @@
 class ImagesController < ApplicationController
   
-  before_filter :check_img?,:only => :set_default
-  before_filter :check_update?, :only => [:destroy, :set_default, :set_public, :uploadFile]
+   before_filter :check_img?,:only => :set_default
+  # before_filter :check_update_img?,:only => :destroy
   
   def uploadFile
     @images = Image.new(params[:image])
@@ -42,10 +42,10 @@ class ImagesController < ApplicationController
       img.update_attribute(:is_main, false)
     end
   end
-  
-  def check_update?
-   @article = Article.find_by_permalink params[:permalink]
-   redirect_to "/article/#{@article.permalink}" unless @article.updatable_by?(current_user)
-  end
+#   
+# def check_update_img?
+    # @image = Image.find_by_id params[:id]
+    # redirect_to "/" unless @image && @image.updatableimg_by?(current_user)
+  # end
  
   end
