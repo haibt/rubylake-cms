@@ -1,3 +1,26 @@
-<div class="articlelienquan">
-	<p>Versions List</p
+<div class="span6 version">
+  <b> Versions List </b><br/>
+  <% @article.versions.limit(1).each do |version|%>
+  <a id="event" style="cursor: pointer"> <%= version.event%></a>
+  <div>
+    <%= version.created_at%>
+  </div>
+  <div id="version" style="display: none ">
+    <%= version.object%>
+    <button id="hidr"> Hide</button>
+  </div><br/>
+  <% end %>
+
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#event').live("click", function(){
+      $('#version').show();
+    });
+    $('#hidr').click(function() {
+      $('#version').hide();
+    });
+  }); 
+</script>
 </div>

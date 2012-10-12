@@ -1,5 +1,5 @@
-<div class="main-index clearfix">
-  <div class="mainarticle clearfix">
+<div class="container clearfix">
+  <div class="row-fluid mainarticle clearfix">
     <p class = "a">
       Featured
     </p>
@@ -8,7 +8,7 @@
     <% end %>
   </div>
 
-  <div class="mainarticle clearfix">
+  <div class="row-fluid mainarticle clearfix">
     <p class="a">
       Articles
     </p>
@@ -16,7 +16,7 @@
       <%= render :partial => "/articles/article_new", :locals => {:article => article, :index => index % 4 } %>
     <% end %>
   </div>
-  <div class="mainarticle clearfix">
+  <div class="row-fluid mainarticle clearfix">
     <p class="a">
       Articles Blog
     </p>

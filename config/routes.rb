@@ -1,4 +1,10 @@
 RubyLakeCms::Application.routes.draw do
+  get "setup/setting"
+
+  get "setup/settings"
+
+  mount Ckeditor::Engine => '/ckeditor'
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   namespace :admin do
@@ -16,7 +22,9 @@ RubyLakeCms::Application.routes.draw do
     match "/logout" => "devise/sessions#destroy" # Add a custom sing out route for user sign out
     match "/login/forgot-password" => "devise/passwords#new" # Add a Custom Route for Forgot password
     match "/login/restore-password" => "devise/passwords#create" # Add a Custom Route for Forgot password
+    
   end
+ 
   match '/profile' => 'home#profile'
   get '/article/new' => 'articles#new'
   post '/article/create' => 'articles#create'
@@ -26,23 +34,45 @@ RubyLakeCms::Application.routes.draw do
   match '/article/:permalink/move' => 'articles#move'
   match '/article/:permalink/delete' => 'articles#delete'
 
-  resource :categories
   get '/category/new' => 'categories#new'
   post '/category/create' => 'categories#create'
   get '/category/:permalink/edit' => 'categories#edit'
   post '/category/:permalink/edit' => 'categories#update'
-  match '/category' => 'categories#index' 
+  match '/category' => 'categories#index'
   match '/category/:permalink' => 'categories#show'
   match '/category/:id/delete' => 'categories#destroy'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  post '/comments/:id/delete'=> 'comments#destroy'
+  post '/comments/:id/update'=> 'comments#update'
   resources :comments
-  resources :versions
-
-
-  resources :home
+  #resources :versions
+  resources :images
+  post '/images/uploadFile' => 'images#uploadFile'
+  post '/images/:id/delete'=> 'images#destroy'
+ 
+  namespace :setup do
+    resources :setadmins
+    match '/setadmins/new' => 'setadmins#new'
+    post "/setadmins/create_admin" => "setadmins#create_admin"
+    match '/setting/new' => 'settings#new'
+    post '/setting/create'=> 'settings#create'
+    post '/theme/create'=> 'themes#create'
+    match 'theme/new' => 'themes#new'
+    match 'theme/message' => 'themes#message'
+   
+  end
+   
+  
+  #post 'home/setting/new' => 'company#create'
   # Sample of regular route:
+
+  match '/images/:id/set_default'=> 'images#set_default'
+  match '/images/:id/set_public'=> 'images#set_public'
+  resources :home
+    # Sample of regular route:
+
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 

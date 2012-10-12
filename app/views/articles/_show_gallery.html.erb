@@ -1,0 +1,10 @@
+ <h2>Gallery</h2>
+  <ul class="gallery container clearfix">
+    <% @article.images.public_img.each do |image| %>
+  <li id="img_<%= image.id %>" class="img" >
+    <a class="idimg"  rubylake:image_id="<%= image.id %>" href="<%= image.photo.url(:medium)%>" rel="prettyPhoto[]"><p class="idimg" style="display: none"><%=image.id%></p><p class="description" style="display: none"><%= image.description %></p><p class="title" style="display: none"><%= image.title %></p><img src="<%= image.photo.url(:thumb) %>"/></a>
+    <a class="del_image" rubylake:image_id="<%= image.id %>"href ="#" >x</a>
+
+  </li>
+  <% end %>
+</ul>

@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
-  def index
 
-  end
-
+  
+  
   def profile
 
     @user = User.all

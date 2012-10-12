@@ -1,92 +1,164 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Scrum2b: be scrum with us</title>
+
+		<title><%= @setting.title%></title>
 		<%= stylesheet_link_tag    "application", :media => "all" %>
 		 <%= javascript_include_tag :defaults %>
 		<%= csrf_meta_tags %>
 		<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-		</head>
-	<body>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+		 <script src="/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<%if @theme %>
+	<body style="background:<%= @theme.color_background_body %>;background-image:url('<%= @theme.img_bg.url %>')  ">
+		<% else %>
+	<body style="background: #e4e4e4">
+		<% end %>
 		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-					<a class="brand" href="/"><i class="icon-home icon-white"></i> Scrum2B</a>
-					
-					<% if current_user %>
-						<div class="btn-group pull-right">
-				            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-				              	<i class="icon-user"></i> <%= current_user.email %>
-				              	<span class="caret"></span>
-				            </a>
-				            <ul class="dropdown-menu">
-				              	<li><%= link_to "Profile", '/profile' %></li>
-				              	<% if current_user.admin? %>
-				              		<li class="divider"></li>
-									<li><%= link_to "Admin", '/admin' %></li>
-							  	<% end %>
-				              	<li class="divider"></li>
-				              	<li><%= link_to "Logout", '/logout' %></li>
-				            </ul>
-			        	</div>
-					<% else %>
-						<div class="pull-right">
-			            	<ul class="nav">
-			            		<li><%= link_to "Login", '/login' %></li>
-			            		<li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %><li>
-			            	</ul>
-			            </div>
+			<%if @theme%>
+			<div class="navbar-inner" style="background:<%= @theme.color_background_menu %> ">
+				<% else %>
+				<div class="navbar-inner" >
 					<% end %>
-			        <div class="nav-collapse">
-						<ul class="nav">
-							<% @main_menus.each do |menu|%>
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+						<a class="brand" href="/" style="width: 40px;height:40px;margin: -9px 0 0 0;line-height: 40px "><%= image_tag @setting.logo.url(:thumb) %></a>
+						<% if current_user %>
+						<div class="btn-group pull-right">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <i class="icon-user"></i> <%= current_user.email %> <span class="caret"></span> </a>
+							<ul class="dropdown-menu">
+								<li>
+									<%= link_to "Profile", '/profile' %>
+								</li>
+								<% if current_user.admin? %>
+								<li class="divider"></li>
+								<li>
+									<%= link_to "Admin", '/admin' %>
+								</li>
+								<% end %>
+								<li class="divider"></li>
+								<li>
+									<%= link_to "Logout", '/logout' %>
+								</li>
+							</ul>
+						</div>
+						<% else %>
+						<div class="pull-right">
+							<ul class="nav">
+								<li>
+									<%= link_to "Login", '/login' %>
+								</li>
+								<li>
+									<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+								<li>
+							</ul>
+						</div>
+						<% end %>
+
+						<div class="nav-collapse">
+							<ul class="nav">
+								<% @main_menus.each do |menu|%>
 								<li>
 									<% if menu.category %>
-										<%= link_to menu.name, "/category/#{menu.category.permalink}" %>
+									<%= link_to menu.name, "/category/#{menu.category.permalink}" %>
 									<% elsif menu.article %>
-										<%= link_to menu.name, "/article/#{menu.article.permalink}" %>
+									<%= link_to menu.name, "/article/#{menu.article.permalink}" %>
 									<% elsif menu.extra_link && !menu.extra_link.blank? %>
-										<%= link_to menu.name, menu.extra_link %>
+									<%= link_to menu.name, menu.extra_link %>
 									<% elsif menu.category%>
-										<%= link_to menu.name,"Category"%>
+									<%= link_to menu.name,"Category"%>
 									<% else %>
-										<%= link_to menu.name, "/category/#{menu.permalink}" %>
+									<%= link_to menu.name, "/category/#{menu.permalink}" %>
 									<% end %>
 								</li>
-							<% end %>
-							<% if current_user %>
+								<% end %>
+								<% if current_user %>
 								<% if current_user.moderator? || current_user.admin? %>
-									<li>
-										<%= link_to "Create Category", "/category/new" %>
-									</li>
+								<li>
+									<%= link_to "Create Category", "/category/new" %>
+								</li>
 								<% end %>
 								<li>
 									<%= link_to "Create Article", "/article/new" %>
 								</li>
-									<li>
-									<%= link_to "Menu", "/category" %>
-								</li>
-							<% end %>
-						</ul>
+								<% end %>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="container">
-			<%= yield %>
-		</div>
-
-		<div class="footer">
 			<div class="container">
-		        <p class="pull-right"><a href="#">Back to top</a></p>
-		        <p>2012 Scrum2B Team</p>
-	            <p>Website: scrum2b.com</p>
-	            <p>E-mail: contact@scrum2b.com</p>
-	        </div>
-        </div>
+				<div id="main_messages">
+					<div  id="success_message_temp" class="success-message alert-success fade in">
+						<a class="close" data-dismiss="alert" href="#">&times;</a>
+						<strong> </strong>
+						<br />
+					</div>
+					<div id="error_message_temp" class="error-message alert-error fade in">
+						<a class="close" data-dismiss="alert" href="#">&times;</a>
+						<strong></strong>
+						<br />
+					</div>
+
+					<% if flash[:notice] %>
+					<p class="notice fade in">
+						<%= flash[:notice] %><span class="close" data-dismiss="alert" href="#">&times;</span>
+					</p>
+					<% end %>
+					<% if flash[:error] %>
+					<p class="error fade in">
+						<%= flash[:error] %><span class="close" data-dismiss="alert" href="#">&times;</span>
+					</p>
+					<% end %>
+				</div>
+
+				<%= yield %>
+
+			</div>
+
+			<div class="footer" >
+				<% if @theme %>
+				<div class="container" style="background: <%= @theme.color_background_article %>;padding:5px">
+					<% else %>
+					<div class="container" style="background:#e4e4e4;padding:5px">
+						<% end %>
+						<p class="pull-right">
+							<a href="#">Back to top</a>
+						</p>
+						<p>
+							2012 <%= @setting.web_name%>
+						</p>
+						<p>
+							<%= @setting.website%>
+						</p>
+						<p>
+							<%= @setting.email%>
+						</p>
+					</div>
+				</div>
+
 	</body>
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$.noConflict();
+		$(document).ready(function() {
+			$("span.close").live("click", function() {
+				$(this).parent().hide();
+			});
+			$("area[rel^='prettyPhoto']").prettyPhoto();
+			$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({
+				animation_speed : 'normal',
+				theme : 'light_square',
+				slideshow : 3000,
+				autoplay_slideshow : false
+			});
+			
+		});
+
+	</script>
 </html>

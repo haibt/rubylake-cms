@@ -8,22 +8,24 @@
 .clearfix { display: inline-block; }
 * html .clearfix { height: 1%; }
 .clearfix { display: block; }
-
-.main ul.listcategory{
-  
-}
-
 .article{
-     border: 1px solid #747474;
-     width:400px;height:250px;
-     float: left;
-     padding:5px;
-     margin:10px 44px 0 44px;
+  padding: 10px;
+  margin-bottom:15px;
+  border: 1px solid #e4e4e4;
+  height: 350px;
+  background: #f7f7f7;
+  position: relative;
+  border-radius: 5px;
+  -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px;
   }
-.article img{
-  
-  margin: 0
+.article.first-child{
+  margin-left: 0px;
 }
-.articlelienquan{
-
+h2{
+  color:#0088cc;
+}
+p.name{
+  color:#02a5e2;
+  font-size:15px;
 }

@@ -22,7 +22,7 @@ class Category < ActiveRecord::Base
   # TODO: ensure this is unique
     self.permalink = name.parameterize rescue nil
   end
-  
+
   def updatable_by?(check_user)
     return true if self.moderators.include?(check_user)
     return parent && parent.updatable_by?(check_user)

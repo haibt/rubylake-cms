@@ -1,20 +1,10 @@
+<div class="container row-fluid">
 <h2>Category</h2>
-<p>
+<p class="name">
 	Name:<span> <%= @category.name%></span>
 </p>
-<div class="mainarticle clearfix">
-	<% @articles.each do |article| %>
-	<% if article.category_id == @category.id %>
-
-	<div class="article">
-		<%= image_tag article.photo.url(:thumb) %>
-		<%= link_to article.title, "/article/#{article.permalink}"%>
-		<br />
-		<%= article.description %>
-
-	</div>
-
-	<% end %>
+		<% @articles.each_with_index do |article, index| %>
+		<%= render :partial => "/articles/article", :locals => {:article => article, :index => index % 4 } %>
 	<% end %>
 </div>
 <% if @category.updatable_by?(current_user) %>

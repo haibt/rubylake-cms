@@ -1,0 +1,10 @@
+<b>Upload image</b>
+  <%= form_for( @images, :as => 'image', :url => "/images/uploadFile", :html => {:id => "upload_form"} ) do |f| %>
+    <%= hidden_field_tag "image[article_id]", @article.id %>
+    <%= f.file_field :photo%><br />
+    <%= f.label :title%>
+	 <%= f.text_field :title%><br />
+	 <%= f.label :description%>
+	 <%= f.text_field :description%><br />
+	 <%= f.submit :class => "btn btn-primary"%>
+  <%end%>

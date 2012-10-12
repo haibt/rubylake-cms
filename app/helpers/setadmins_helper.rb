@@ -1,0 +1,2 @@
+module SetadminsHelper
+end

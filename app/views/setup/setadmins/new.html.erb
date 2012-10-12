@@ -1,0 +1,10 @@
+<div class="container">
+<h1>Add new Admin</h1>
+<%= form_tag :action => 'create' %>
+<p>Email:</p><%= email_field 'user', 'email' %></p>
+<p>Password:</p><%= password_field 'user', 'password' %></p>
+<%= password_field 'user', 'password_confirmation' %></p>
+<%= hidden_field_tag "user[is_admin]",true %>
+<%= submit_tag "Create", :class => "btn btn-primary " %>
+<%= form_tag %>
+</div>
